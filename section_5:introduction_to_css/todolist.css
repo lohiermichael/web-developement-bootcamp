@@ -1,0 +1,18 @@
+body {
+    background: orange;
+}
+
+li {
+    border: 2px solid red;
+}
+
+/* # is used to target an id */
+#special {
+    background: yellow;
+}
+
+/* . is used to target a class */
+.completed {
+    /*  text-decoration is used to add lines to a piece of text */
+    text-decoration: line-through;
+}
