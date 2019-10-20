@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bootstrap Grid system</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <style>
+        .pink {
+            background: pink;
+            border: 1px solid purple;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. Understand the purpose of grids -->
+    <!-- Any Bootstrap grid has to be inside a container -->
+    <div class="container">
+        <div class="row">
+            <!-- Number of units it takes in the container after  md- -->
+            <!-- We have to split the 12 units across the different elements -->
+            <div class="col-md-2 pink">COL MD 2</div>
+            <div class="col-md-8 pink">COL MD 8</div>
+            <div class="col-md-2 pink">COL MD 2</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 pink">Bla</div>
+            <div class="col-md-4 pink">Bla</div>
+            <div class="col-md-4 pink">Bla</div>
+        </div>
+    </div>
+</body>
+
+</html>
