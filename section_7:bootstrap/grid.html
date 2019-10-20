@@ -1,35 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Bootstrap Grid system</title>
-    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="bootstrap.css" />
     <style>
-        .pink {
-            background: pink;
-            border: 1px solid purple;
-        }
+      .pink {
+        background: pink;
+        border: 1px solid purple;
+      }
+      .orange {
+          background: orange;
+          border: 1px dashed red;
+      }
+
+    .green {
+        background: green;
+        border: 1px dotted greenyellow;
+        height: 50px;
+    }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- 1. Understand the purpose of grids -->
     <!-- Any Bootstrap grid has to be inside a container -->
     <div class="container">
-        <div class="row">
-            <!-- Number of units it takes in the container after  md- -->
-            <!-- We have to split the 12 units across the different elements -->
-            <div class="col-md-2 pink">COL MD 2</div>
-            <div class="col-md-8 pink">COL MD 8</div>
-            <div class="col-md-2 pink">COL MD 2</div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 pink">Bla</div>
-            <div class="col-md-4 pink">Bla</div>
-            <div class="col-md-4 pink">Bla</div>
-        </div>
-    </div>
-</body>
+      <!-- <div class="row"> -->
+      <!-- Number of units it takes in the container after  md- -->
+      <!-- We have to split the 12 units across the different elements -->
+      <!-- <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div>
+            <div class="col-lg-1 col-md-2 pink">COL MD 1</div> -->
 
+    <!-- Write nested grids -->
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12 pink">
+          <div class="row">
+            <div class="col-lg-6 orange">Halfway</div>
+            <div class="col-lg-6 orange">Another half</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12 pink">TOUR DATE!</div>
+        <div class="col-md-3 col-sm-6 col-xs-12 pink">TOUR DATE!</div>
+        <div class="col-md-3 col-sm-6 col-xs-12 pink">
+            <div class="row">
+                <div class="col-lg-2 green">1/6</div>
+                <div class="col-lg-2 green">1/6</div>
+                <div class="col-lg-2 green">1/6</div>
+                <div class="col-lg-2 green">1/6</div>
+                <div class="col-lg-2 green">1/6</div>
+                <div class="col-lg-2 green">1/6</div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. The 4 different sizes -->
+    <!-- xs: extra small aka mobile layout -->
+    <!-- s: small aka table layout -->
+    <!-- m: medium aka laptop layout-->
+    <!-- l: large aka bigger desktops' layouts-->
+  </body>
 </html>
