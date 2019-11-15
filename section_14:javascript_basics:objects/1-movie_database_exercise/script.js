@@ -25,7 +25,7 @@ var movies = [
 
 
 function buildString(movie){
-  var str = "You have"
+  var str = "You have "
 
   // Is it watched?
   if (movie.watched){
