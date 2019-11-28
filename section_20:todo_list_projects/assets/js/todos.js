@@ -21,9 +21,14 @@ $("input[type='text']").on("keypress", function(e){
             // Grabbing new todo text from input
             var todoText = $(this).val();
             // Add input text in a new li of the ul
-            $("ul").append("<li><span>X</span> " + todoText + "</li>");
+            $("ul").append("<li><span><i class='fa fa-trash'></i></span> " + todoText + "</li>");
             // Remove text from input
             $(this).val("");
         }
     }
 })
+
+// Animation on the "Plus" button
+$(".fa-plus").on("click", function(){
+    $("input[type='text']").fadeToggle();
+});
