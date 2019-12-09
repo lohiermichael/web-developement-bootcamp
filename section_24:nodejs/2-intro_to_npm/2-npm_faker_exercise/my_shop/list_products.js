@@ -15,7 +15,7 @@ var faker = require('faker');
 // var secondRandom = faker.random.number();
 // console.log(firstRandom === secondRandom);
 
-
+// 5. Use faker to prices out 10 random product names and prices
 // Make a header
 console.log("==================")
 console.log("WELCOME TO MY SHOP!")
