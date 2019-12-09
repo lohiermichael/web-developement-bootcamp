@@ -1,4 +1,5 @@
 ### Solution
+
 1. mkdir Animals
 2. mkdir Animals/AwesomeAnimals Animals/SketchyAnimals
 3. touch Animals/AwesomeAnimals/Capybara.js Animals/AwesomeAnimals/Arctifox.html Animals/AwesomeAnimals/TreeFrog.txt
