@@ -7,4 +7,4 @@ var joke = require("knock-knock-jokes");
 
 // 3. Use it
 console.log(cat()) // => returns a random cat
-console.log(joke()) // => returns a random cat
+console.log(joke()) // => returns a random joke
