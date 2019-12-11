@@ -19,6 +19,15 @@ app.get("/fallinlovewith/:thing", function(req, res){
     res.render("love.ejs", {thingVar: thing});
 });
 
+app.get("/posts", (req,res) => {
+    var posts = [
+        {title: "Post 1", author: "Susy"},
+        {title: "Post 2", author: "Michael"},
+        {title: "Post 3", author: "Elliot"}
+    ];
+    res.render("posts.ejs", {posts: posts})
+});
+
 
 app.listen(3000, function() {
     console.log("More express on port 3000");
