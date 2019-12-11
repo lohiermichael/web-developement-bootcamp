@@ -1,7 +1,7 @@
+<%- include("partials/header") %> 
 <!-- Include Javascript code in HTML, that is what ejs files are made for -->
 <h1>You fell in love with: <%= thingVar.toUpperCase() %> </h1>
 
-<!-- Include some conditional statements -->
 <!-- We need to remove the equal sign for conditions -->
 <% if (thingVar.toLowerCase() === "rusty"){ %>
     <p>That's a good  dog</p>
@@ -10,4 +10,4 @@
 <% } %> 
 
 <p>P.S. this is the love.ejs file</p>
-
+<%- include("partials/footer") %> 

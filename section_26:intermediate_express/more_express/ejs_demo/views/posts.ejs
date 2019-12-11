@@ -1,6 +1,10 @@
+<%- include("partials/header") %> 
+<body>
 <h1>The Posts Page</h1>
 <% for(var i = 0; i < posts.length; i ++){ %>
-<li><%= posts[i].title %> - <strong><%= posts[i].author %></strong></li>
+    <li>
+        <%= posts[i].title %> - <strong><%= posts[i].author %></strong>
+    </li>
 <% }; %>
 
 <!-- It is more common to ise a forEach for arrays -->
@@ -8,8 +12,6 @@
     <li>
         <%= post.title %> - <strong><%= post.author %></strong>
     </li>
-<% }); %> 
-
-
-
+<% }); %>
+<%- include("partials/footer") %> 
 

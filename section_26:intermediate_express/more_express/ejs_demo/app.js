@@ -1,7 +1,12 @@
 var express = require("express");
 var app = express();
 
+// By default, the "view" directory is chose to reference files.
+// If we want to add in more files in another directory, we need to mention this new directory
+app.use(express.static("public"));
 
+// In order to avoid repeating ourselves with .ejs all the time, we can use this to dry up our code
+app.set("view engine","ejs"); 
 
 app.get("/", function(req, res){
     // We can either write some HTML here but it is really painful
@@ -16,7 +21,7 @@ app.get("/fallinlovewith/:thing", function(req, res){
     // res.send("You fell in love with " + thing);
 
     // We can give arguments in the render method as parameters that will be used in the ejs file
-    res.render("love.ejs", {thingVar: thing});
+    res.render("love", {thingVar: thing});
 });
 
 app.get("/posts", (req,res) => {
@@ -25,7 +30,7 @@ app.get("/posts", (req,res) => {
         {title: "Post 2", author: "Michael"},
         {title: "Post 3", author: "Elliot"}
     ];
-    res.render("posts.ejs", {posts: posts})
+    res.render("posts", {posts: posts});
 });
 
 
