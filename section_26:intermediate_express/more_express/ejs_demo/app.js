@@ -13,7 +13,7 @@ app.get("/", function(req, res){
     // res.send("<h1>Welcome to the home page!<\h1><h2>blabla<\h2>");
     // Or we can render a file by using the render method on the res object
     // We need to create the file in a separate directory
-    res.render("home.ejs")
+    res.render("home")
 });
 
 app.get("/fallinlovewith/:thing", function(req, res){
