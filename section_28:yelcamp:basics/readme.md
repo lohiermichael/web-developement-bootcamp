@@ -30,3 +30,21 @@ Each Campground has:
 3. touch views/partials/footer.ejs
 4. Complete these files and include them to the ejs files
 5. Include Bootstrap with a CDN link
+
+# 3. Creating new campgrounds
+
+* Setup new campgrounds POST route
+* Add in body-parser
+* Setup route to show form
+* Add basic unstyled form
+
+## Steps
+
+1. Make a post route to campgrounds
+2. npm install body-parser --save
+3. Render a new page for the form to add a new campground
+4. Complete the redirection to the campground page as soon as we add a new object
+5. Add an anchor tag to add a new campground on the campground page
+6. Add an anchor tag on the campground/new to redirect to the campground page
+
+
