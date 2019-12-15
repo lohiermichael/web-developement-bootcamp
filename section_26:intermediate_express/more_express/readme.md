@@ -32,4 +32,11 @@ The way we write Javascript code in EJS file is by passing variables within our 
     * DRY up our code including the partial pieces of HTML
 
 * Use partials to DRY up our code
+
+# 4. Post Requests!!!
+
+* Write post routes, and test them with Postman
+* Use a form to send a post request
+* Use a body parser to get data from form
+
     
