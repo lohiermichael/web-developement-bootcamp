@@ -47,4 +47,16 @@ Each Campground has:
 5. Add an anchor tag to add a new campground on the campground page
 6. Add an anchor tag on the campground/new to redirect to the campground page
 
+# 4. Style the campgrounds page
+
+* Add a better header/title
+* Make campgrounds display in a grid
+
+## Steps
+
+1. Add a jumbotron and style its elements
+2. Put the loop of the campgrounds inside a row, each campground being a col
+3. For each campground, create a thumbnail and a caption for the title
+4. Adapt the size of each campground with a flex display
+5. Center the texts
 
