@@ -22,6 +22,6 @@ It has become more popular than XML and is replacing it because of the compatibi
 Same syntax as for an URL.
 The result though is returned as a String. We need to parse it using the method `JSON.parse()` to convert it into a Javascript object.
 
-**Important:** Library called **lotus** which allows to run a code and open an interface to run Javascript and interacting with the variables of the code.
+**Important:** Library called **lotus** which allows to run a code and open a console interface to run Javascript and interact with the variables of the code.
 
 We can also use another library called **request-promise** for which the syntax is more succinct.
