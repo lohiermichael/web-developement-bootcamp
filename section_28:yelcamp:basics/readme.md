@@ -60,3 +60,16 @@ Each Campground has:
 4. Adapt the size of each campground with a flex display
 5. Center the texts
 
+# 5. Style the Navbar and Form
+
+* Add a navbar to all templates
+* Style the new campground form
+
+## Steps
+ 
+ 1. Make the Navbar: brand and collapsed button on the right
+ 2. Add the nav bar HTML to the header template in the partials folder
+ 3. Style the form
+    * Use grid to center it
+    * form-group to space the elements
+
