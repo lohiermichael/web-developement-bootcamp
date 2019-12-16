@@ -52,3 +52,17 @@ ex: db.dogs.remove({"breed": "Mutt"}).limit(1)
 
 FYI: CRUD stands for Create Read Update Delete
 
+# 4. Mongoose
+
+* What is Mongoose?
+
+It is a tool which helped us interact with MongoDB inside our JavaScript files.
+
+* Why are we using it?
+
+It makes us easier to interact with the database similarly to how jQuery helps up interact with the DOM.
+We need to install it with npm: npm install mongoose
+
+* Interact with Mongo Database using Mongoose: It an ODM: Object Data Mapper
+
+
