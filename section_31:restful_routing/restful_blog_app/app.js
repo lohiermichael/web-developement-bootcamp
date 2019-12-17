@@ -35,12 +35,6 @@ var blogSchema = new mongoose.Schema({
 
 var Blog = mongoose.model("Blog", blogSchema);
 
-// Blog.create({
-//     title: "Test Blog",
-//     image: "https://t4.ftcdn.net/jpg/02/96/35/63/240_F_296356355_0YlFGZllBt6G7J7MbQUK9XTJTmU351ev.jpg",
-//     body: "HELLO THIS IS A BLOG POST"
-// });
-
 // Restful routes
 
 // Redirect the route page to the index
