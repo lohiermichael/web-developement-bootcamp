@@ -96,7 +96,7 @@ We have made 3 RESTFUL routes so far:
    2. `app.post("/campgrounds")`
    3. `app.get("/campgrounds/new")`
 
-There are 7 kinds of RESTFUL routes:
+There are 7 kinds of RESTFUL routes but we are going to cover only 4 of them here:
 
 name    ex URL      verb     desc. of ex
 ============================================================
