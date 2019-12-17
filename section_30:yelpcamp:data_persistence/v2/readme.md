@@ -73,3 +73,18 @@ Each Campground has:
     * Use grid to center it
     * form-group to space the elements
 
+# 6. Add Mongoose
+
+* Install and configure mongoose
+* Setup campground model
+* Use campground model inside of our routes
+
+## Steps
+
+1. npm install mongoose --save
+2. Import it in the app.js file and make a database yelp_camp
+3. Make a model and an instance of campground
+4. First try to create a campground in the collection campgrounds in the database yelpcamp
+5. Render campgrounds from the database
+6. Implement the creation of campground in the database
+
