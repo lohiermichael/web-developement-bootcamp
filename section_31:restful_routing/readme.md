@@ -1,6 +1,6 @@
 # RESTful Routing
 
-## Introduction
+## 1. Introduction
 
 * Define REST and explain WHY it matters
 
@@ -22,4 +22,11 @@ UPDATE | /dogs/:id  |     PUT |     Update one dog and redirect
 DESTROY |/dogs/:id  |     DELETE |  Delete one dog and redirect
 
 * Show example of RESTful routing in practice
+
+## 2. Blog index
+
+* Setup the Blog App
+* Create the Blog model
+* Add INDEX route and template
+* Add Simple Nav Bar 
 
