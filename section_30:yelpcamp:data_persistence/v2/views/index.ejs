@@ -21,6 +21,10 @@
                         <div class="caption">
                             <h4><%= campground.name %></h4>
                         </div>
+                        <p>
+                            <!-- The id of a campground is stored as an attribute of campground -->
+                            <a href="/campgrounds/<%= campground._id %> " class="btn btn-primary">More info</a>
+                        </p>
                     </div>
                 </div>
             <% }); %> 

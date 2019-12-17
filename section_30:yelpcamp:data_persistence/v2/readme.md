@@ -88,3 +88,40 @@ Each Campground has:
 5. Render campgrounds from the database
 6. Implement the creation of campground in the database
 
+ # Show Page
+ * Review the RESTFUL routes we've seen so far
+
+We have made 3 RESTFUL routes so far:
+   1. `app.get("/campgrounds")`
+   2. `app.post("/campgrounds")`
+   3. `app.get("/campgrounds/new")`
+
+There are 7 kinds of RESTFUL routes:
+
+name    ex URL      verb     desc. of ex
+============================================================
+INDEX   /dogs       GET      Display a list of all dogs
+NEW     /dogs/new   GET      Displays a form to make a new dog
+CREATE  /dogs       POST     Add new dog to database
+SHOW    /dogs/:id   GET      Displays info about one dog
+
+
+
+ * Add description to our campground model
+ * show db.collection.drop()
+ * Add a show route.template
+
+ ## Steps
+
+ 1. Add description on the different routes already created:
+   * INDEX
+   * NEW
+   * CREATE
+2. Create the SHOW route of campgrounds as a template
+3. Add in description to the model of a campground
+4. Drop our previous collection to follow the new pattern with description. You do it when you have a major change in your database structure. The command is `db.campgrounds.drop()`
+5. Create a new campground with a description for the example 
+6. Create a new show.ejs file to display the campground
+7. Rename campgrounds.ejs to index.ejs 
+8. Add a new button to the show page
+9. Add a description input in the form
