@@ -98,12 +98,12 @@ We have made 3 RESTFUL routes so far:
 
 There are 7 kinds of RESTFUL routes but we are going to cover only 4 of them here:
 
-name    ex URL      verb     desc. of ex
-============================================================
-INDEX   /dogs       GET      Display a list of all dogs
-NEW     /dogs/new   GET      Displays a form to make a new dog
-CREATE  /dogs       POST     Add new dog to database
-SHOW    /dogs/:id   GET      Displays info about one dog
+name | ex URL | verb | desc. of ex
+--- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
+INDEX |  /dogs |          GET |     Display a list of all dogs
+NEW |    /dogs/new  |     GET |     Displays a form to make a new dog
+CREATE | /dogs |          POST |    Add new dog to database and redirect
+SHOW  |  /dogs/:id |      GET |     Displays info about one dog
 
 
 
