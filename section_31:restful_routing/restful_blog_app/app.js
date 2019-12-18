@@ -2,14 +2,17 @@
 const express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
-    app = express();
+    app = express(),
+    methodOverride = require('method-override');
 
 // Format ejs setting
 app.set('view engine', 'ejs');
-// To use CSS files
+// To use CSS files: looking for the file `public`
 app.use(express.static("public"));
 // Body parser setting
 app.use(bodyParser.urlencoded({ extended: true }));
+// Method override wetting: looking for the key word `_method`
+app.use(methodOverride("_method"));
 
 // Mongoose configuration
 mongoose.connect(
@@ -83,7 +86,34 @@ app.get("/blogs/:id", (req,res) => {
     });
 });
 
+// 5. EDIT
+// It is a mix of NEW and SHOW
+app.get("/blogs/:id/edit", (req,res) => {
+    Blog.findById(req.params.id, function(err, foundBlog){
+        if (err){
+            console.log("Error", err);
+            res.redirect("/blogs")
+        } else {
+            res.render("edit", {blog: foundBlog});
+        }
+    });
+});
   
+// 6. UPDATE
+// When we click on submit in the edit page
+app.put("/blogs/:id", (req,res) => {
+    // This method takes 2 arguments id and modified content
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
+        if (err){
+            console.log("Error", err);
+            res.redirect("/blogs")
+        } else {
+            // We can either redirect to the index or the show page
+            res.redirect("/blogs/" + req.params.id);
+        } 
+    });
+});
+
 // Listen on a PORT
 const PORT = process.env.PORT || 3000;
 app.listen (PORT, () => console.log(`Server Running On Port ${PORT}`));

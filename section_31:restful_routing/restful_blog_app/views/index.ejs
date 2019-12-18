@@ -8,7 +8,8 @@
     <span><%= blog.created %> </span>
     <!-- Only keeping the 100 first characters -->
     <p><%= blog.body.substring(0, 100) %> ...</p>
-    <a href="blogs/<%= blog._id %>" class="ui black button">Read more!</a>
+    <a href="blogs/<%= blog._id %>" class="ui black button">Read more</a>
+    <a href="blogs/<%= blog._id%>/edit" class="ui green button">Edit</a>
     </div>
 <% }); %>
 <%- include('partials/footer') %> 

@@ -35,13 +35,28 @@ DESTROY |/dogs/:id  |     DELETE |  Delete one dog and redirect
 * Add NEW and CREATE routes
 * Add some styling to the form
 
-# 4. Show time lol
+# 4. Show time
 * Add Show route
 * Add Show template
 * Add links to show page
 * Style show template
 
 Note: replacing = by - in ejs makes a code evaluation, we will see later how to "sanitize" this input
+
+# .5 Edit/Update
+
+* Add Edit route
+* Add Edit form
+* Add Update route
+* Add Update form
+* Add Method-Override
+
+PUT requests are not implemented in HTML
+We have to install method-override:
+`npm install method-override --save`
+and include it with 
+`?_method=PUT`
+
 
 
 
