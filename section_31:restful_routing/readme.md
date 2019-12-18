@@ -30,3 +30,8 @@ DESTROY |/dogs/:id  |     DELETE |  Delete one dog and redirect
 * Add INDEX route and template
 * Add Simple Nav Bar 
 
+## 3. Blog create and new
+* Handle the implementation of the form
+* Add NEW and CREATE routes
+* Add some styling to the form
+

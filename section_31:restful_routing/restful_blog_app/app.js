@@ -54,6 +54,24 @@ app.get("/blogs", (req,res) => {
     });    
 });
 
+// 2. NEW
+app.get("/blogs/new", (req,res) => {
+    res.render("new");
+});
+
+// 3. CREATE
+app.post("/blogs", (req,res) => {
+    Blog.create(req.body.blog, function(err, newlyCreated){
+        if (err){
+            console.log("Error: ", err);
+            res.render('new');
+        } else {
+            res.redirect("/blogs");
+        }
+    })
+});
+
+  
 // Listen on a PORT
 const PORT = process.env.PORT || 3000;
 app.listen (PORT, () => console.log(`Server Running On Port ${PORT}`));
