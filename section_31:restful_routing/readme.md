@@ -35,3 +35,13 @@ DESTROY |/dogs/:id  |     DELETE |  Delete one dog and redirect
 * Add NEW and CREATE routes
 * Add some styling to the form
 
+# 4. Show time lol
+* Add Show route
+* Add Show template
+* Add links to show page
+* Style show template
+
+Note: replacing = by - in ejs makes a code evaluation, we will see later how to "sanitize" this input
+
+
+
