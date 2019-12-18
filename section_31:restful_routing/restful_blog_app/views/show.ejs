@@ -11,7 +11,13 @@
             <div class="description">
                 <p><%= blog.body %></p>
             </div>
-            <a href="blogs" class="ui grey button">Return</a>
+            <div>
+                <a href="blogs" class="ui grey button">Return</a>
+                <!-- For the deletion we have to do it under a form -->
+                <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST" id="delete">
+                    <button href="/blogs" class="ui red button">Delete</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
