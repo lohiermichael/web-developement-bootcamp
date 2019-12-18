@@ -43,7 +43,7 @@ DESTROY |/dogs/:id  |     DELETE |  Delete one dog and redirect
 
 Note: replacing = by - in ejs makes a code evaluation, we will see later how to "sanitize" this input
 
-# .5 Edit/Update
+# 5. Edit/Update
 
 * Add Edit route
 * Add Edit form
@@ -56,6 +56,11 @@ We have to install method-override:
 `npm install method-override --save`
 and include it with 
 `?_method=PUT`
+
+## 6. Destroy
+
+* Add Destroy Route
+* Add Edit and Destroy links
 
 
 
