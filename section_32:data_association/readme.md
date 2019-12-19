@@ -30,4 +30,12 @@ The most of what we are going to use
 * Push a new post to the user
 * Find an existing user by attribute and push a new post to it
 
+## 3. Referencing Data
+
+* New syntax to refer to a post by id
+* Add a post to a specific user finding him by his email
+
+*** Note: the posts are saved in the posts collection and are kept under the user with their id as a reference key ***
+
+* Find user and all posts for this user
 
