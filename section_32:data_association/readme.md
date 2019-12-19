@@ -39,3 +39,15 @@ The most of what we are going to use
 
 * Find user and all posts for this user
 
+## 4. Module exports
+
+* Introduce module.exports
+* Move out code to modules
+
+PROS:
+* It cleans up the code
+* It is more structured
+
+CONS:
+* Much more requiring
+
