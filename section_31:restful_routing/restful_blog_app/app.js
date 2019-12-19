@@ -3,7 +3,8 @@ const express = require("express"),
   mongoose = require("mongoose"),
   bodyParser = require("body-parser"),
   app = express(),
-  methodOverride = require("method-override");
+  methodOverride = require("method-override"),
+  expresssSanitizer = require("express-sanitizer");
 
 // Format ejs setting
 app.set("view engine", "ejs");
@@ -13,6 +14,8 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 // Method override wetting: looking for the key word `_method`
 app.use(methodOverride("_method"));
+// Sanitize the inputs - has to come after the body parser
+app.use(expresssSanitizer());
 
 // Mongoose configuration
 mongoose.connect(
@@ -63,6 +66,8 @@ app.get("/blogs/new", (req, res) => {
 
 // 3. CREATE
 app.post("/blogs", (req, res) => {
+  // Sanitize
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   Blog.create(req.body.blog, function(err, newlyCreated) {
     if (err) {
       console.log("Error: ", err);
@@ -101,6 +106,8 @@ app.get("/blogs/:id/edit", (req, res) => {
 // 6. UPDATE
 // When we click on submit in the edit page
 app.put("/blogs/:id", (req, res) => {
+  // Sanitize
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   // This method takes 2 arguments id and modified content
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(
     err,

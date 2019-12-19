@@ -62,6 +62,15 @@ and include it with
 * Add Destroy Route
 * Add Edit and Destroy links
 
+## 7. Final Updates
+
+* Sanitize the blog body
+
+npm install express-sanitizer --save
+
+* Style index
+* Update REST Table
+
 
 
 
