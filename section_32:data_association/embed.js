@@ -62,8 +62,6 @@ User.findOne({name: "Paul Lover"}, function(err, user){
   }
 });
 
-
-
 // Make a new instance of post in the database under rhe collection posts
 // var newPost = new Post({
 //   title: "First post",
