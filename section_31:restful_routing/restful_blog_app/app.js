@@ -35,7 +35,7 @@ var blogSchema = new mongoose.Schema({
   title: String,
   image: String,
   body: String,
-  created: { type: Date, default: Date.now }
+  created: { type: Date, defßault: Date.now }
 });
 
 var Blog = mongoose.model("Blog", blogSchema);
