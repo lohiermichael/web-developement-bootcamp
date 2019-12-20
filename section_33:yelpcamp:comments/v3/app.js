@@ -3,8 +3,11 @@ const express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
-  Campground = require("./models/campground")
-
+  Campground = require("./models/campground"),
+  seedDB = require("./seeds");
+  
+  
+  
 // Connect to the database
 mongoose.connect(
   "mongodb://localhost/yelp_camp",
@@ -16,29 +19,17 @@ mongoose.connect(
     if (err) console.error(err);
     else console.log("Connected to the mongodb");
   }
-);
-
-// Campground.create(
-//   {
-//     name: "Granite Hill",
-//     image: "https://t4.ftcdn.net/jpg/02/85/46/07/240_F_285460722_WlwSgE1pRZgx1BT29xtD6C4Zzob1UUqr.jpg",
-//     description: "This is a wonderful granite hill. I really advise you to visit the place."
-//   },
-//   function(err, campground) {
-//     if (err) {
-//       console.log("Error: ", err);
-//     } else {
-//       console.log("New campground", campground);
-//     }
-//   }
-// );
-
-app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-// Landing page
-app.get("/", (req, res) => {
+  );
+    
+    
+  app.set("view engine", "ejs");
+  app.use(bodyParser.urlencoded({ extended: true }));
+    
+  // Execute the module to test the database
+  seedDB();
+    
+    // Landing page
+    app.get("/", (req, res) => {
   res.render("landing");
 });
 
@@ -50,8 +41,6 @@ app.get("/campgrounds", (req, res) => {
             console.log("Error", err);
         }
         else {
-            console.log("All the campgrounds");
-            console.log(campgrounds);
             res.render("index", { campgrounds: campgrounds });
         }
     });
@@ -87,11 +76,11 @@ app.get("/campgrounds/new", (req, res) => {
 // SHOW route - display info about one campground
 app.get("/campgrounds/:id", (req,res) => {
     // Find campground with provided id
-    Campground.findById(req.params.id, function (err, foundCampground) {
+    Campground.findById(req.params.id).populate("comments").exec(function (err, foundCampground) {
         if (err){
             console.log("Error", err);
         }
-        else {           
+        else {          
             // Render show campground
             res.render("show", {campground: foundCampground});
         }

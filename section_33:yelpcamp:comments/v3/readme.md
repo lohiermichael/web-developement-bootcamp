@@ -141,4 +141,31 @@ SHOW  |  /dogs/:id |      GET |     Displays info about one dog
 5. Export the model out of campground.js
 6. Require the Campground model in app.js
 
+# 9. Add a seed file
+
+* Add a seed.js file
+* Run the seeds file every time the server starts
+
+## Steps
+
+1. Inside seed.js file, write code to remove all campgrounds from the database 
+2. Recreate the seeds: 3 campgrounds.
+3. Add the same comment for the three campgrounds
+
+# 10. Add the comment model
+
+* Make our errors go away!
+* Display comments on campground show page
+
+## Steps
+
+1. touch models/comment.js
+2. In this file, make the schema of "comment":
+   * author
+   * text
+3. Refactor the code with async functions
+4. Change remove by deleteMany (Node new syntax)
+5. Add the comments to the show route by populating the campground with its own comments
+
+
 
