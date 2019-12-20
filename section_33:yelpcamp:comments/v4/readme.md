@@ -89,6 +89,7 @@ Each Campground has:
 6. Implement the creation of campground in the database
 
  # 7. Show Page
+
  * Review the RESTFUL routes we've seen so far
 
 We have made 3 RESTFUL routes so far:
@@ -104,8 +105,6 @@ INDEX |  /dogs |          GET |     Display a list of all dogs
 NEW |    /dogs/new  |     GET |     Displays a form to make a new dog
 CREATE | /dogs |          POST |    Add new dog to database and redirect
 SHOW  |  /dogs/:id |      GET |     Displays info about one dog
-
-
 
  * Add description to our campground model
  * show db.collection.drop()
@@ -166,6 +165,36 @@ SHOW  |  /dogs/:id |      GET |     Displays info about one dog
 3. Refactor the code with async functions
 4. Change remove by deleteMany (Node new syntax)
 5. Add the comments to the show route by populating the campground with its own comments
+
+# 11. Comment New/Create
+
+* Discuss nested routes
+
+When adding a new comment, we need the campground id to be in the URL. So what we will do is nesting the comment routes on top of the SHOW route of campground
+
+name | ex URL | verb | desc. of ex
+--- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
+NEW |    /campgrounds/:id/comments/new  |     GET |     Displays a form to make a new comment
+CREATE | /campgrounds/:id/comments |          POST |    Add new comment to database link it to its campground and redirect
+
+* Add the comment new and create routes
+* Add the new comment form
+
+## Steps
+
+1. Refactor the structure of our files: create two folders inside of views: comments and campgrounds
+2. Make a "new.ejs" file inside the comments folder
+3. Change the location of the include for the header and footer
+4. Copy the new.ejs file of campground and adapt it for comments. The id of the campground should be kept in the NEW route
+5. Make the POST route for comment, if should add the comment to the associated campground
+ Add an anchor tag to add a new comment
+
+# 12. Style show page
+
+* Add sidebar to show page
+* Display comments nicely
+
+
 
 
 

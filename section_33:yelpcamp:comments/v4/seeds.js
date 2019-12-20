@@ -25,21 +25,21 @@ let seedDB = async function (){
     // Awaiting comments to be removed
     // Remove all campgrounds
     await Campground.deleteMany({});
-    console.log("Campground removed");
+    // console.log("Campground removed");
     // The rest of the code won't run until this line finishes
     await Comment.deleteMany({});
-    console.log("Comment removed");
+    // console.log("Comment removed");
     // Recreate all campgrounds from the seeds
     for (seed of seeds) {
         let campground = await Campground.create(seed);
-        console.log("Added campground");
+        // console.log("Added campground");
         let comment = await Comment.create(
             {
                 text: "This place is great but I wish there was Internet",
                 author: "The Geek"
             });
         campground.comments.push(comment);
-        console.log("Created new comment");
+        // console.log("Created new comment");
         campground.save();
     };
 };
