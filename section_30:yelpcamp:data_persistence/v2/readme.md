@@ -88,7 +88,7 @@ Each Campground has:
 5. Render campgrounds from the database
 6. Implement the creation of campground in the database
 
- # Show Page
+ # 7. Show Page
  * Review the RESTFUL routes we've seen so far
 
 We have made 3 RESTFUL routes so far:
