@@ -2,7 +2,8 @@
 const express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
-  mongoose = require("mongoose");
+  mongoose = require("mongoose"),
+  Campground = require("./models/campground")
 
 // Connect to the database
 mongoose.connect(
@@ -16,15 +17,6 @@ mongoose.connect(
     else console.log("Connected to the mongodb");
   }
 );
-
-// SCHEMA SETUP
-var campgroundSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
-
-var Campground = mongoose.model("Campground", campgroundSchema);
 
 // Campground.create(
 //   {

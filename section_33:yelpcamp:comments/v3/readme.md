@@ -126,4 +126,19 @@ SHOW  |  /dogs/:id |      GET |     Displays info about one dog
 8. Add a new button to the show page
 9. Add a description input in the form
 
-## 
+##  8. Refactor Mongoose Code
+
+* Create a models directory
+* Use module.exports
+* Require everything correctly!
+
+## Steps
+
+1. mkdir models
+2. touch models/campground.js
+3. Move the content in app.js relative to campground to this file
+4. require mongoose in campground.js
+5. Export the model out of campground.js
+6. Require the Campground model in app.js
+
+
