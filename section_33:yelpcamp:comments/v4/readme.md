@@ -189,11 +189,6 @@ CREATE | /campgrounds/:id/comments |          POST |    Add new comment to datab
 5. Make the POST route for comment, if should add the comment to the associated campground
  Add an anchor tag to add a new comment
 
-# 12. Style show page
-
-* Add sidebar to show page
-* Display comments nicely
-
 
 
 
