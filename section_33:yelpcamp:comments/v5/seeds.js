@@ -6,19 +6,21 @@ var seeds = [
     {
         name: "Granite Hill",
         image: "https://t4.ftcdn.net/jpg/02/85/46/07/240_F_285460722_WlwSgE1pRZgx1BT29xtD6C4Zzob1UUqr.jpg",
-        description: "Wonderful sunset"
+        description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus, sit! Sapiente placeat maiores, a neque qui quibusdam obcaecati magnam dignissimos aliquam? Ab quidem repudiandae sed aut officia reprehenderit quisquam, aperiam delectus ea vitae, debitis accusantium ipsam recusandae! Pariatur, rem ipsum! Quo veniam facere aperiam tempora magnam earum, nemo id reprehenderit?"
     },
     {
         name: "Wild America",
         image: "https://t3.ftcdn.net/jpg/01/04/39/74/240_F_104397470_KOh3GwOPKv62RcutYNnoryWwXtKSAkFK.jpg",
-        description: "This is the campground you need if you cherish solitude and peacefulness."
+        description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus, sit! Sapiente placeat maiores, a neque qui quibusdam obcaecati magnam dignissimos aliquam? Ab quidem repudiandae sed aut officia reprehenderit quisquam, aperiam delectus ea vitae, debitis accusantium ipsam recusandae! Pariatur, rem ipsum! Quo veniam facere aperiam tempora magnam earum, nemo id reprehenderit?"
     },
     {
         name: "Collective spot",
         image: "https://t4.ftcdn.net/jpg/00/98/85/59/240_F_98855948_ynjkxnksBv62XUEj5hhII4clXAde1p4p.jpg",
-        description: "You want to meet friends, come!"
+        description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus, sit! Sapiente placeat maiores, a neque qui quibusdam obcaecati magnam dignissimos aliquam? Ab quidem repudiandae sed aut officia reprehenderit quisquam, aperiam delectus ea vitae, debitis accusantium ipsam recusandae! Pariatur, rem ipsum! Quo veniam facere aperiam tempora magnam earum, nemo id reprehenderit?"
     }
 ];
+
+
 
 // The keyword async is needed
 let seedDB = async function (){

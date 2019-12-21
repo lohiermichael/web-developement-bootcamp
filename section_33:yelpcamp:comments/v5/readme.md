@@ -194,6 +194,18 @@ CREATE | /campgrounds/:id/comments |          POST |    Add new comment to datab
 * Add sidebar to show page
 * Display comments nicely
 
+## Steps
+
+1. Put everything on the show page in a container
+2. Add in a side bar
+3. Use of grid to split the page between the sidebar and the main content
+4. Put the main content in a thumbnail
+5. Design the comment part
+6. For additional styling, add a public directory and a stylesheets and a CSS file in it.
+
+
+
+
 
 
 
