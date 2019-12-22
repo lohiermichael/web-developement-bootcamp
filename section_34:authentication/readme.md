@@ -40,3 +40,17 @@
 8. Make the secret route and page in views
 9. Require Mongoose and create database
 
+## 3. Auth Code Along Part 2
+
+* Create User model
+* Configure passport
+
+### Steps
+
+1. Require all the installed packages
+2. Work on the user model. Make a new files models/user.js
+3. Create the User schema
+4. Use passportLocalMongoose which adds addition methods to the user
+5. Use Passport and add a secret sentence for authentication
+6. Serialize and deserialize the user: it helps to encode and decode the data
+
