@@ -37,5 +37,6 @@
 5. npm install express mongoose passport passport-local passport-local-mongoose body-parser express-session ejs --save
 6. Require all packages in app.js
 7. Make the home route and page in views
-7. Make the secret route and page in views
+8. Make the secret route and page in views
+9. Require Mongoose and create database
 

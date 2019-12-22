@@ -1,9 +1,9 @@
 // Import Express
 const express = require('express'),
+app = express(),
 mongoose = require('mongoose');
 
-const app = express();
-
+// Connect to the database
 mongoose.connect(
 "mongodb://localhost/auth_demo_app",
 {
