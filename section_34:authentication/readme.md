@@ -54,3 +54,18 @@
 5. Use Passport and add a secret sentence for authentication
 6. Serialize and deserialize the user: it helps to encode and decode the data
 
+## Auth CodeAlong Part 3
+
+* Add Register routes
+* Add Register form
+
+### Steps
+
+1. Make the Sign up route. 
+2. Create the view register.ejs and add:
+    * one input for the user name
+    * one input for the password
+    * a submit button
+3. Make a post route with passport
+4. Add a link to sign up on the home page
+

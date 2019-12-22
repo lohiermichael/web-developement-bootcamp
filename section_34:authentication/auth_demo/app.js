@@ -30,6 +30,7 @@ app.use(expressSession({
 }));
 mongoose.set('useCreateIndex', true);
 app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -38,6 +39,11 @@ passport.serializeUser(User.serializeUser());
 // Take data from the session and decode it
 passport.deserializeUser(User.deserializeUser());
 
+// ==========
+// ROUTES
+// ==========
+
+
 app.get("/", (req,res) => {
     res.render("home");
 });
@@ -45,6 +51,34 @@ app.get("/", (req,res) => {
 app.get("/secret", (req,res) => {
     res.render("secret");
 });
+
+// ==========
+// AUTH ROUTES
+// ==========
+
+// Sign up to the form
+app.get("/register", (req,res) => {
+    res.render("register");
+});
+
+// Handling user sign up
+app.post("/register", (req,res) => {
+    // The following lines take a user with its name only
+    // Separately, its password
+    // It will handle a new user creating a hash to store in the database
+    User.register(new User({ username: req.body.userName,}), req.body.password, (err, user) => {
+        if (err) {
+            console.log(err);
+            res.render("register");
+        }
+        // Log the user in
+        passport.authenticate("local")(res, req, function(){
+            res.redirect("/secret");
+        });
+    });
+
+});
+
 
 // Listen on a PORT
 const PORT = process.env.PORT || 3000;
