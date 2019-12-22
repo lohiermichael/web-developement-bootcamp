@@ -30,8 +30,8 @@ mongoose.connect(
   // Execute the module to test the database
   seedDB();
     
-    // Landing page
-    app.get("/", (req, res) => {
+// Landing page
+app.get("/", (req, res) => {
   res.render("landing");
 });
 
