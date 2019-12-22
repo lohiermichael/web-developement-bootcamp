@@ -23,12 +23,12 @@ mongoose.connect(
   );
     
     
-  app.set("view engine", "ejs");
-  app.use(bodyParser.urlencoded({ extended: true }));
-  // We mention __dirname in case it changes
-  app.use(express.static(__dirname + "/public"));
-  // Execute the module to test the database
-  seedDB();
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
+// We mention __dirname in case it changes
+app.use(express.static(__dirname + "/public"));
+// Execute the module to test the database
+seedDB();
     
 // Landing page
 app.get("/", (req, res) => {
