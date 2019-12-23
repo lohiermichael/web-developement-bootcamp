@@ -65,14 +65,15 @@ app.get("/register", (req,res) => {
 app.post("/register", (req,res) => {
     // The following lines take a user with its name only
     // Separately, its password
-    // It will handle a new user creating a hash to store in the database
-    User.register(new User({ username: req.body.userName,}), req.body.password, (err, user) => {
+    // It will handle a new user creating a hash to store the password in the database
+    User.register(new User({ username: req.body.userName}), req.body.password, (err, user) => {
         if (err) {
-            console.log(err);
-            res.render("register");
+            console.log("Err: ", err);
+            return res.render("register");
         }
         // Log the user in
         passport.authenticate("local")(res, req, function(){
+            console.log(user);
             res.redirect("/secret");
         });
     });
