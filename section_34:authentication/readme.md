@@ -54,7 +54,7 @@
 5. Use Passport and add a secret sentence for authentication
 6. Serialize and deserialize the user: it helps to encode and decode the data
 
-## Auth CodeAlong Part 3
+## 4. Auth CodeAlong Part 3
 
 * Add Register routes
 * Add Register form
@@ -68,4 +68,9 @@
     * a submit button
 3. Make a post route with passport
 4. Add a link to sign up on the home page
+
+## 5. Auth CodeAlong Part 4
+* Add Login routes
+* Add Login form
+
 
