@@ -8,7 +8,7 @@ const express = require("express"),
   Campground = require("./models/campground"),
   Comment = require("./models/comment"),
   seedDB = require("./seeds"),
-  User = require("./models/user")
+  User = require("./models/user");
   
   
   
