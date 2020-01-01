@@ -228,7 +228,19 @@ CREATE | /campgrounds/:id/comments |          POST |    Add new comment to datab
 4. Serialize and deserialize
 5. Add in the get route for the register
 6. Make the view
-6. Add in the post route for the register
+7. Add in the post route for the register
+
+# 15. Auth Pt. 3: Register
+
+* Add login routes
+* Add login template
+
+## Steps
+1. Add in the get route for the register
+2. Make the view
+3. Add in the post route for the register
+
+
 
 
 

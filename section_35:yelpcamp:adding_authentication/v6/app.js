@@ -159,7 +159,6 @@ app.get("/register", (req,res) => {
 // Show register form
 app.post("/register", (req,res) => {
   var newUser = new User({username: req.body.username});
-  console.log(newUser);
   User.register(newUser, req.body.password, (err, user) => {
     if (err) {
       console.log("Err: ", err);
@@ -169,6 +168,18 @@ app.post("/register", (req,res) => {
       res.redirect("/campgrounds")
     })
   });
+});
+
+// Show login form
+app.get("/login", (req,res) => {
+    res.render("login");
+});
+
+// Handle login logic
+app.post("/login", passport.authenticate("local", {
+  successRedirect: "/campgrounds",
+  failureRedirect: "/login"
+}), (req,res) => {
 });
 
 
