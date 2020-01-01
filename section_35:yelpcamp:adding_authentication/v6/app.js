@@ -93,7 +93,7 @@ app.post("/campgrounds", (req, res) => {
 });
 
 // NEW route - display from to create new campground
-app.get("/campgrounds/new", (req, res) => {
+app.get("/campgrounds/new", isLoggedIn,(req, res) => {
     res.render("campgrounds/new");
 });
 
