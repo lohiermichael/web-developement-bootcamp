@@ -254,6 +254,19 @@ CREATE | /campgrounds/:id/comments |          POST |    Add new comment to datab
 4. Add header and footer to register and login views
 5. Only allows logged-in users to add a comment
 
+# 17. Auth Pt. 5: Show /Hide Links
+
+* Show/hide auth links in navbar correctly
+
+## Steps
+
+1. Add logic in the header partial view
+2. Add the currentUser variable that is `undefined` if the user is not logged in as a variable accessible from any view with `app.use` as a middleware
+3. Add the name of the current logged in user
+
+*Note:*: It could be a link to a profile page...
+
+
 
 
 
