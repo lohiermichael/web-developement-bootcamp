@@ -94,10 +94,10 @@ app.get("/login", (req, res) => {
 // Login logic
 // Middleware: is run before it callback function
 app.post("/login", passport.authenticate("local", {
-    successRedirect: "/secret",
-    failureRedirect: "/login"
-  })
-);
+  successRedirect: "/secret",
+  failureRedirect: "/login"
+}) ,function(req, res){
+});
 
 // Listen on a PORT
 const PORT = process.env.PORT || 3000;
