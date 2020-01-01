@@ -5,8 +5,6 @@ const express = require('express'),
   passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   expressSession = require('express-session'),
-  Campground = require('./models/campground'),
-  Comment = require('./models/comment'),
   User = require('./models/user'),
   seedDB = require('./seeds');
 
@@ -34,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // We mention __dirname in case it changes
 app.use(express.static(__dirname + '/public'));
 // Execute the module to test the database
-seedDB();
+// seedDB();
 
 // Passport configuration
 app.use(

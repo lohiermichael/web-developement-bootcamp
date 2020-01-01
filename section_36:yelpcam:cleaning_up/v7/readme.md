@@ -292,3 +292,15 @@ There are three main groups of routes:
 9.  Change `app` for `router`
 10. Manage the dependencies by requiring the adequate package for every route
 11. Shorten trick of the code with by prefixing the route of each group of routes. _ex:_ `app.use("/campground)", campgroundRoutes);`
+
+# 19. Users + Comments
+
+- Associate users and comments
+- Save author's name to a comment automatically
+
+## Steps
+
+1. Change the schema of the comment: author is no longer a simple string, We keep its id and its username
+2. Inside the route, before pushing the comment to the list of comments of the campground, add the username and the id to the comment
+3. Remove the **_author_** field from the new comment form
+4. Modify the show template of the campground to display only the username in front of the comment

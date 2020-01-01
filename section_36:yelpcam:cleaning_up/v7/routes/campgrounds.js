@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Campground = require('../models/campground');
 
+// =============================
+// CAMPGROUNDS ROUTES
+// =============================
+
 // INDEX route - list all campgrounds
 router.get('/', (req, res) => {
   //   Retrieve campgrounds from the database
