@@ -211,7 +211,9 @@ CREATE | /campgrounds/:id/comments |          POST |    Add new comment to datab
 ## Steps
 
 1. npm install passport passport-local passport-local-mongoose express-session --save
-2. Import packages
+2. Import packages in app.js
+3. Make the User model 
+
 
 
 
