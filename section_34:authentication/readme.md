@@ -77,4 +77,10 @@
 * Add Login routes
 * Add Login form
 
+## Steps
+
+1. Make the get route
+2. Copy paste and modify the form of register in a new view called login.ejs
+3. Make the post route with `successRedirect` and `failureRedirect`
+
 
