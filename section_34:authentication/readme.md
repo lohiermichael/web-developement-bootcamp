@@ -69,7 +69,9 @@
 3. Make a post route with passport
 4. Add a link to sign up on the home page
 
-**Warning: `username` works not `userName`
+**Warnings:** 
+    * `username` works not `userName`
+    * Not inverse `req` and `res`
 
 ## 5. Auth CodeAlong Part 4
 * Add Login routes

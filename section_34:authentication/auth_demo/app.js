@@ -64,18 +64,24 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 
+           
 // Handling user sign up
-app.post("/register", function(req, res){
-  console.log(req.body.username);
-  User.register(new User({username: req.body.username}), req.body.password, function(err, user){
-      if(err){
-          console.log(err);
-          return res.render('register');
+app.post("/register", function (req, res){
+  // The following lines take a user with its name only
+  // Separately, its password
+  User.register(new User({username: req.body.username }), req.body.password, function(err, user){
+  // It will handle a new user creating a hash to store the password in the database
+      if (err){
+        console.log(err);
+        return res.render("register");
       }
-      passport.authenticate("local")(req, res, function(){
-         res.redirect("/secret");
+      // Log the user in
+      passport.authenticate("local")(req, res, function() {
+        // console.log(user);
+        res.redirect("/secret");
       });
-  });
+    }
+  );
 });
 
 // LOGIN
@@ -87,9 +93,7 @@ app.get("/login", (req, res) => {
 
 // Login logic
 // Middleware: is run before it callback function
-app.post(
-  "/login",
-  passport.authenticate("local", {
+app.post("/login", passport.authenticate("local", {
     successRedirect: "/secret",
     failureRedirect: "/login"
   })
