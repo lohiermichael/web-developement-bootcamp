@@ -1,12 +1,14 @@
 // Import Express
 const express = require("express"),
-  mongoose = require("mongoose"),
-  passport = require("passport"),
-  bodyParser = require("body-parser"),
-  User = require("./models/user"),
-  LocalStrategy = require("passport-local"),
-  passportLocalMongoose = require("passport-local-mongoose"),
-  expressSession = require("express-session");
+mongoose = require("mongoose"),
+passport = require("passport"),
+bodyParser = require("body-parser"),
+User = require("./models/user"),
+LocalStrategy = require("passport-local").Strategy,
+// passportLocalMongoose = require("passport-local-mongoose"),
+expressSession = require("express-session");
+
+const app = express();
 
 // Connect to the database
 mongoose.connect(
@@ -22,7 +24,6 @@ mongoose.connect(
 );
 mongoose.set("useCreateIndex", true);
 
-const app = express();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -64,25 +65,17 @@ app.get("/register", (req, res) => {
 });
 
 // Handling user sign up
-app.post("/register", (req, res) => {
-  // The following lines take a user with its name only
-  // Separately, its password
-  // It will handle a new user creating a hash to store the password in the database
-  User.register(
-    new User({ username: req.body.userName }),
-    req.body.password,
-    (err, user) => {
-      if (err) {
-        console.log(err);
-        return res.render("register");
+app.post("/register", function(req, res){
+  console.log(req.body.username);
+  User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+      if(err){
+          console.log(err);
+          return res.render('register');
       }
-      // Log the user in
-      passport.authenticate("local")(res, req, function() {
-        console.log(user);
-        res.redirect("/secret");
+      passport.authenticate("local")(req, res, function(){
+         res.redirect("/secret");
       });
-    }
-  );
+  });
 });
 
 // LOGIN
