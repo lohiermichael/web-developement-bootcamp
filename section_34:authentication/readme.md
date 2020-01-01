@@ -77,10 +77,24 @@
 * Add Login routes
 * Add Login form
 
-## Steps
+### Steps
 
 1. Make the get route
 2. Copy paste and modify the form of register in a new view called login.ejs
 3. Make the post route with `successRedirect` and `failureRedirect`
+
+## 6. Auth CodeAlong Part 5
+
+* Add Logout Route
+* Add isLoggedIn middleware
+
+### Steps
+
+1. Make a link for Log out on all the views
+2. Make the route and use `req.logOut()` inside
+3. Redirect to the homepage when logout
+4. Right a middleware function `isLoggedIn` to fix the issue of "Going to 'secret' without being logged in
+5. Add it as the second argument of the route for secret
+
 
 
