@@ -1,17 +1,17 @@
 // Import Express
 const express = require("express"),
-  app = express(),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
-  passport = require("passport-local"),
+  passport = require("passport"),
   LocalStrategy = require("passport-local").Strategy,
+  expressSession = require("express-session"),
   Campground = require("./models/campground"),
   Comment = require("./models/comment"),
   User = require("./models/user"),
   seedDB = require("./seeds");
-  
-  
-  
+
+const app = express();
+
 // Connect to the database
 mongoose.connect(
   "mongodb://localhost/yelp_camp",
@@ -32,6 +32,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 // Execute the module to test the database
 seedDB();
+
+
+// Passport configuration
+app.use(expressSession({
+  secret: "This is a good app",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
     
 // Landing page
 app.get("/", (req, res) => {
@@ -130,6 +146,32 @@ app.post("/campgrounds/:id/comments", (req, res) => {
     }
   });
 });
+
+// =============================
+// AUTH ROUTES
+// =============================
+
+// Handle sign up logic
+app.get("/register", (req,res) => {
+  res.send("/register")  
+});
+
+// Show register form
+app.post("/register", (req,res) => {
+  var newUser = new User({username: req.body.username});
+  console.log(newUser);
+  User.register(newUser, req.body.password, (err, user) => {
+    if (err) {
+      console.log("Err: ", err);
+      return res.render("register");
+    };
+    passport.authenticate("local")(req, res, function(){
+      res.redirect("/campgrounds")
+    })
+  });
+});
+
+
 
 
 // Listen on a PORT

@@ -203,7 +203,7 @@ CREATE | /campgrounds/:id/comments |          POST |    Add new comment to datab
 5. Design the comment part
 6. For additional styling, add a public directory and a stylesheets and a CSS file in it.
 
-# 13. Add User Model
+# 13. Auth Pt. 1: Add User Model
 
 * Install all packages for authentication
 * Define User model
@@ -213,6 +213,22 @@ CREATE | /campgrounds/:id/comments |          POST |    Add new comment to datab
 1. npm install passport passport-local passport-local-mongoose express-session --save
 2. Import packages in app.js
 3. Make the User model 
+
+# 14. Auth Pt. 2: Register
+
+* Configure passport
+* Add register
+* Add register template
+
+## Steps
+
+1. Create an expresss session
+2. Initialize it 
+3. Use the local strategy of the user model
+4. Serialize and deserialize
+5. Add in the get route for the register
+6. Make the view
+6. Add in the post route for the register
 
 
 
