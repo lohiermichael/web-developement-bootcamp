@@ -240,6 +240,21 @@ CREATE | /campgrounds/:id/comments |          POST |    Add new comment to datab
 2. Make the view
 3. Add in the post route for the register
 
+# 16. Auth Pt. 4: Logout/Navbar
+* Add logout route
+* Prevent user from adding a comment if not signed in
+* Add links to navbar
+* Show/hide auth links correctly
+
+## Steps
+
+1. Add in log out route with a get request
+2. Redirect to login
+3. Add links to respectively login logout and sign in in the header
+4. Add header and footer to register and login views
+5. Only allows logged-in users to add a comment
+
+
 
 
 
