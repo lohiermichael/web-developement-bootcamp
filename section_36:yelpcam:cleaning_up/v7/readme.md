@@ -304,3 +304,12 @@ There are three main groups of routes:
 2. Inside the route, before pushing the comment to the list of comments of the campground, add the username and the id to the comment
 3. Remove the **_author_** field from the new comment form
 4. Modify the show template of the campground to display only the username in front of the comment
+
+# 20. Users + Campgrounds
+
+- Prevent an unauthenticated user from creating a campground
+- Save user+id to a newly created campground
+
+## Steps
+
+1. Use the middleware isLoggedIn on Create and New routes, otherwise, technically someone could make a post request from Postman.

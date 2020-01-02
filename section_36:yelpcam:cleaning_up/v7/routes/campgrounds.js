@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 });
 
 // CREATE route - add new campground to DB
-router.post('/', (req, res) => {
+router.post('/', isLoggedIn, (req, res) => {
   // Get data from form and add to campground array
   var newName = req.body.name;
   var newImage = req.body.image;
