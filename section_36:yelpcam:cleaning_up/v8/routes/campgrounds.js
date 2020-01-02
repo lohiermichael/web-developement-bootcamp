@@ -24,10 +24,15 @@ router.post('/', isLoggedIn, (req, res) => {
   var newName = req.body.name;
   var newImage = req.body.image;
   var newDescription = req.body.description;
+  var newAuthor = {
+    id: req.user._id,
+    username: req.user.username
+  };
   var newCampground = {
     name: newName,
     image: newImage,
-    description: newDescription
+    description: newDescription,
+    author: newAuthor
   };
   // Create a campground and save it in the database
   Campground.create(newCampground, function(err, newlyCreated) {

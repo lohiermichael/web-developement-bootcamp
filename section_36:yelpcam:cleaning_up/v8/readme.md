@@ -313,3 +313,6 @@ There are three main groups of routes:
 ## Steps
 
 1. Use the middleware isLoggedIn on Create and New routes, otherwise, technically someone could make a post request from Postman.
+2. Similar to a comments add an author to campground model
+3. Add the logic in the root to add the name of the author to each new campground
+4. Show the name of the author on the show page
