@@ -66,6 +66,34 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// EDIT route - Display edit form for one campground
+router.get('/:id/edit', (req, res) => {
+  Campground.findById(req.params.id, (err, foundCampground) => {
+    if (err) {
+      console.log('Err: ', err);
+      res.redirect('/campgrounds');
+    } else {
+      res.render('campgrounds/edit', { campground: foundCampground });
+    }
+  });
+});
+
+// UPDATE ROUTE - update information for one campground and redirect
+router.put('/:id', (req, res) => {
+  Campground.findByIdAndUpdate(
+    req.params.id,
+    req.body.campground,
+    (err, updatedCampground) => {
+      if (err) {
+        console.log('Err: ', err);
+        res.redirect(`/campgrounds`);
+      } else {
+        res.redirect(`/campgrounds/${req.params.id}`);
+      }
+    }
+  );
+});
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();

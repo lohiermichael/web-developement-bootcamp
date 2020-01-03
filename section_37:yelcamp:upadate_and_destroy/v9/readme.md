@@ -316,3 +316,24 @@ There are three main groups of routes:
 2. Similar to a comments add an author to campground model
 3. Add the logic in the root to add the name of the author to each new campground
 4. Show the name of the author on the show page
+
+# 21. Editing campgrounds
+
+- Add Method-Override
+- Add Edit Route for Campgrounds
+- Add Link to Edit Page
+- Add Update Route
+- Fix \$set problem
+
+## Steps
+
+1. We need to create a PUT request to update a campground and to do that we need method-override
+   npm install method-override --save
+2. Require method-override in app.js
+3. Make a campgrounds/edit.ejs in the views
+4. Copy paste the new.ejs form and add in slight modifications: - the redirection
+   - the type of request
+   - the title of the form
+   - the placeholders by the existing values of the campground
+5. Add in update route
+6. Add a button to edit the campground on the show page

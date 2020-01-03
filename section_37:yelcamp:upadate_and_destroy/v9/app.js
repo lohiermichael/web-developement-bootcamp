@@ -4,6 +4,7 @@ const express = require('express'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
+  methodOverride = require('method-override'),
   expressSession = require('express-session'),
   User = require('./models/user'),
   seedDB = require('./seeds');
@@ -44,6 +45,8 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

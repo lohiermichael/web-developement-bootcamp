@@ -15,11 +15,16 @@
     <div class="col-md-9">
       <div class="thumbnail">
         <img class="img-responsive" src="<%= campground.image %> " alt="" />
-        <e class="caption-full">
+        <div class="caption-full">
           <h4 class="pull-right">$9/night</h4>
           <h4><a><%= campground.name %></a></h4>
           <p><%= campground.description %></p>
           <p><em>Submitted by <%= campground.author.username %></em></p>
+          <a
+            href="/campgrounds/<%= campground._id %>/edit "
+            class="btn btn-warning"
+            >Edit</a
+          >
         </div>
       </div>
       <div class="well">
@@ -39,7 +44,6 @@
             <p><%= comment.text %></p>
           </div>
         </div>
-
         <% }; %>
       </div>
     </div>
