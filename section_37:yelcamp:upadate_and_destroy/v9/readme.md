@@ -337,3 +337,13 @@ There are three main groups of routes:
    - the placeholders by the existing values of the campground
 5. Add in update route
 6. Add a button to edit the campground on the show page
+
+# Deleting campgrounds
+
+- Add DESTROY route
+- Add DELETE button
+
+## Steps
+
+1. Make the DESTROY route in the campground.js file
+2. Add another button in the show page under a form (to submit the DELETE request it is needed)
