@@ -347,3 +347,4 @@ There are three main groups of routes:
 
 1. Make the DESTROY route in the campground.js file
 2. Add another button in the show page under a form (to submit the DELETE request it is needed)
+3. Restyle the button inside the form with an id

@@ -22,14 +22,15 @@
           <p><em>Submitted by <%= campground.author.username %></em></p>
           <a
             href="/campgrounds/<%= campground._id %>/edit "
-            class="btn btn-warning"
+            class="btn btn-xs btn-warning"
             >Edit</a
           >
           <form
             action="/campgrounds/<%= campground._id %>?_method=DELETE"
             method="POST"
+            id="deleteForm"
           >
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-xs btn-danger">Delete</button>
           </form>
         </div>
       </div>
