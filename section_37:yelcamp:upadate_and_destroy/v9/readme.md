@@ -360,3 +360,22 @@ There are three main groups of routes:
 1. To restrict access to the edit functionality only to the user who made the post, we should match the user id and and the creator of the post id. We are not using the middleware this time but rather an internal condition.
 2. As soon as it works for the EDIT route. The code can be dried up because it will be used for UPDATE and DELETE routes as well.
 3. Modify the SHOW view to only display the edit and delete buttons if the user matches the owner of the post. Hopefully we added to any templates the variable `currentUser` in app.js
+
+**Note:** Even though, we don't display the Edit and Delete buttons for the wrong user, we still keep the middleware to protect the routes for more security.
+
+# 24. Editing comments
+
+- Add Edit route for comments
+- Add Edit button
+- Add Update route
+
+## Steps
+
+1. Make the EDIT route under the routes/comments.js
+
+**Note:** The routes for comments being nested inside the campground, we need to differentiate the variable names for ids of comment and campground as followed:
+campground/:id/comment/:comment_id/edit
+
+2. Add in the Edit button for comment on the campground show page
+3. Make the comment edit template by copy pasting the new form and modify it
+4. Make the UPDATE route for comments to handle the modification of a comment
