@@ -390,3 +390,16 @@ campground/:campground_id/comment/:comment_id/edit
 1. The route to delete is `/campgrounds/:campground_id/comments/:comment_id`
 2. Make the destroy route in the routes/comments.js
 3. Make the delete button on the show page of the campground for each comment
+
+# 26. Authorization for comments
+
+- User can only edit his comments
+- User can only delete his comments
+- Hide/Show edit and delete buttons
+- Refactor middleware
+
+## Step
+
+1. Make a checkCommentOwnership middleware: cpy paste the middleware checkCampgroundOwnership and make the slight modifications
+2. Add it for the UPDATE and DESTROY routes
+3. Display Edit and Delete buttons only for the author of the comment by putting a condition in the show page of the campground
