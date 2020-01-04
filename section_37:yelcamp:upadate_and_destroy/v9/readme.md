@@ -338,7 +338,7 @@ There are three main groups of routes:
 5. Add in update route
 6. Add a button to edit the campground on the show page
 
-# Deleting campgrounds
+# 22. Deleting campgrounds
 
 - Add DESTROY route
 - Add DELETE button
@@ -348,3 +348,15 @@ There are three main groups of routes:
 1. Make the DESTROY route in the campground.js file
 2. Add another button in the show page under a form (to submit the DELETE request it is needed)
 3. Restyle the button inside the form with an id
+
+# 23. Authorization
+
+- User can only edit his campgrounds
+- User can only delete his campgrounds
+- Hide/Show edit and delete button for right user
+
+## Steps
+
+1. To restrict access to the edit functionality only to the user who made the post, we should match the user id and and the creator of the post id. We are not using the middleware this time but rather an internal condition.
+2. As soon as it works for the EDIT route. The code can be dried up because it will be used for UPDATE and DELETE routes as well.
+3. Modify the SHOW view to only display the edit and delete buttons if the user matches the owner of the post. Hopefully we added to any templates the variable `currentUser` in app.js
