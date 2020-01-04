@@ -10,7 +10,7 @@ const Comment = require('../models/comment');
 // NEW route
 router.get('/new', isLoggedIn, (req, res) => {
   // Find campground by id
-  Campground.findById(req.params.id, (err, foundCampground) => {
+  Campground.findById(req.params.campground_id, (err, foundCampground) => {
     if (err) console.log('Err: ', err);
     else {
       console.log(foundCampground);
@@ -22,7 +22,7 @@ router.get('/new', isLoggedIn, (req, res) => {
 // CREATE route
 router.post('/', isLoggedIn, (req, res) => {
   // Lookup campground using id
-  Campground.findById(req.params.id, (err, campground) => {
+  Campground.findById(req.params.campground_id, (err, campground) => {
     if (err) {
       console.log('Err: ', err);
       redirect('/campgrounds');
@@ -77,6 +77,18 @@ router.put('/:comment_id', (req, res) => {
       }
     }
   );
+});
+
+// DESTROY route
+router.delete('/:comment_id', (req, res) => {
+  Comment.findOneAndRemove(req.params.comment_id, err => {
+    if (err) {
+      console.log('Err: ', err);
+      res.redirect('back');
+    } else {
+      res.redirect(`/campgrounds/${req.params.campground_id}`);
+    }
+  });
 });
 
 function isLoggedIn(req, res, next) {

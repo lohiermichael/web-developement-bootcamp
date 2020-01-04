@@ -374,8 +374,19 @@ There are three main groups of routes:
 1. Make the EDIT route under the routes/comments.js
 
 **Note:** The routes for comments being nested inside the campground, we need to differentiate the variable names for ids of comment and campground as followed:
-campground/:id/comment/:comment_id/edit
+campground/:campground_id/comment/:comment_id/edit
 
 2. Add in the Edit button for comment on the campground show page
 3. Make the comment edit template by copy pasting the new form and modify it
 4. Make the UPDATE route for comments to handle the modification of a comment
+
+# 25. Deleting comments
+
+- Add Destroy route
+- Add Delete button
+
+## Steps
+
+1. The route to delete is `/campgrounds/:campground_id/comments/:comment_id`
+2. Make the destroy route in the routes/comments.js
+3. Make the delete button on the show page of the campground for each comment
