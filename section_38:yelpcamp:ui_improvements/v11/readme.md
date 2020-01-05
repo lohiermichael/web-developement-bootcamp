@@ -431,3 +431,12 @@ campground/:campground_id/comment/:comment_id/edit
 - Don't use console.log to debug flash as it appears only once i.e in the console.log and not after
 - Be careful not to miss up res.render('login') and res.redirect('/login')
 - ejs transforms an array with one element inside into a string
+
+6. Add a general variable in app.use:
+   `res.locals.message = req.flash('errors')`
+7. Move the error message to the header
+8. Try another message on logout
+9. Change for Bootstrap alerts
+10. Put the alert in a container so it doesn't cover all the screen
+11. Differentiate error and success flashes
+12. Add in conditions to not display the Bootstrap bars if there is no error message
