@@ -425,3 +425,9 @@ campground/:campground_id/comment/:comment_id/edit
 3. Add a req.flash in the middleware for login with error
 4. Handle it in /login
 5. Add an error message in the login template
+
+**Note:** Debugging, I faced some issues from which I draw lessons:
+
+- Don't use console.log to debug flash as it appears only once i.e in the console.log and not after
+- Be careful not to miss up res.render('login') and res.redirect('/login')
+- ejs transforms an array with one element inside into a string

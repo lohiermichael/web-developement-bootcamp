@@ -54,7 +54,7 @@ middleware.isLoggedIn = function(req, res, next) {
   }
   // It doesn't show up immediately but on the next page as soon as we redirect
   req.flash('error', 'Please Login First!');
-  res.render('login');
+  res.redirect('/login');
 };
 
 module.exports = middleware;
