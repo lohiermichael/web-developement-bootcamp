@@ -440,3 +440,4 @@ campground/:campground_id/comment/:comment_id/edit
 10. Put the alert in a container so it doesn't cover all the screen
 11. Differentiate error and success flashes
 12. Add in conditions to not display the Bootstrap bars if there is no error message
+13. Fill in the error messages one at a time by route. For the registration and sign in errors no need to make our own message, we can pass the one of Mongoose
