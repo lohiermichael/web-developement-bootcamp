@@ -442,7 +442,7 @@ campground/:campground_id/comment/:comment_id/edit
 12. Add in conditions to not display the Bootstrap bars if there is no error message
 13. Fill in the error messages one at a time by route. For the registration and sign in errors no need to make our own message, we can pass the one of Mongoose
 
-# 29. Refactor landing page
+# 28. Refactor landing page
 
 - Create the background slider ejs file
 - Style the linked landing.css
@@ -470,3 +470,23 @@ In the landing.css file:
    - Give to each element of the list a background image
    - Animate the display with an overlap and fade in/out
 8. Tackle browser animation support
+
+# 29. Dynamic price feature
+
+- Add a new property Price to the campground object
+- Modify the new form
+- Modify the edit form
+- Modify the show page
+
+## Steps
+
+1. Create anew database **yelp_camp_v12** to avoid any type of overlap
+2. Change the model of a campground by adding a price
+3. Add an input in the form of campgrounds/new.ejs:
+   - Copy the model of the other inputs and adapt the content
+   - Add two attributes:
+     1. min: stands for the minimum price
+     2. step: the value by which is increased the price
+4. Add in the input for the form of campgrounds/edit.ejs
+5. Display the price in the show page
+6. Don't forget to handle the price with the POST route for campground

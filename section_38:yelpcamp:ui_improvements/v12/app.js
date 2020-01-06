@@ -16,16 +16,17 @@ const commentRoutes = require('./routes/comments'),
   campgroundRoutes = require('./routes/campgrounds'),
   indexRoutes = require('./routes/index');
 
+const dbName = 'yelp_camp_v12';
 // Connect to the database
 mongoose.connect(
-  'mongodb://localhost/yelp_camp',
+  `mongodb://localhost/${dbName}`,
   {
     useUnifiedTopology: true,
     useNewUrlParser: true
   },
   err => {
     if (err) console.error(err);
-    else console.log('Connected to the mongodb');
+    else console.log(`Connected to the mongodb on database ${dbName}`);
   }
 );
 
