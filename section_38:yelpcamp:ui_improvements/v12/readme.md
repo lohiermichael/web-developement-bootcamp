@@ -441,3 +441,32 @@ campground/:campground_id/comment/:comment_id/edit
 11. Differentiate error and success flashes
 12. Add in conditions to not display the Bootstrap bars if there is no error message
 13. Fill in the error messages one at a time by route. For the registration and sign in errors no need to make our own message, we can pass the one of Mongoose
+
+# 29. Refactor landing page
+
+- Create the background slider ejs file
+- Style the linked landing.css
+
+## Steps
+
+In the landing.ejs file
+
+1. Make our own header for the landing page with:
+
+   - Bootstrap
+   - a personal landing.css stylesheet
+   - a link to modernizr which helps make our page cross-browser compatible
+   - logic for the errors
+
+2. Make a div with the button to go to campgrounds
+3. Make an unordered list with 5 empty items on which will bw attached the 5 sliding background images
+
+In the landing.css file:
+
+4. Change the background
+5. Center the text for the header and format the text
+6. Implement CSS for the future place of the unordered list. _New:_ z-index to order content
+7. Implement CSS with animation for each image:
+   - Give to each element of the list a background image
+   - Animate the display with an overlap and fade in/out
+8. Tackle browser animation support
