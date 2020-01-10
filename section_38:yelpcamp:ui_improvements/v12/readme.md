@@ -502,4 +502,16 @@ In the landing.css file:
   5. Modify middleware
   6. Modify the comments routes
   7. Modify ejs file for the anchor tags and actions of form but not for the conditions
+- Implement fuzzy search
+- Add in campground location with Google Maps as a new feature
 - Add flash on not existing user
+- Change footer
+- Add in home link in navigation
+- Display time since post was created with Moment JS
+- Create User profile
+- Implement password rest
+- Upload image with Multer and Cloudinary
+- Refactor Async/Await
+- Add in in-app notification
+- Rate and review the campgrounds
+- Display comments on the campground show page directly
