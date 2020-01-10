@@ -51,9 +51,9 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 });
 
 // SHOW route - display info about one campground
-router.get('/:id', (req, res) => {
-  // Find campground with provided id
-  Campground.findById(req.params.id)
+router.get('/:slug', (req, res) => {
+  // Find campground with slug
+  Campground.findOne({ slug: req.params.slug })
     .populate('comments')
     .exec(function(err, foundCampground) {
       if (err) {
@@ -66,46 +66,49 @@ router.get('/:id', (req, res) => {
 });
 
 // EDIT route - Display edit form for one campground
-router.get('/:id/edit', middleware.checkCampgroundOwnership, (req, res) => {
-  Campground.findById(req.params.id, (err, foundCampground) => {
+router.get('/:slug/edit', middleware.checkCampgroundOwnership, (req, res) => {
+  Campground.findOne({ slug: req.params.slug }, (err, foundCampground) => {
     res.render('campgrounds/edit', { campground: foundCampground });
   });
 });
 
 // UPDATE ROUTE - update information for one campground and redirect
-router.put('/:id', middleware.checkCampgroundOwnership, (req, res) => {
-  Campground.findByIdAndUpdate(
-    req.params.id,
+router.put('/:slug', middleware.checkCampgroundOwnership, (req, res) => {
+  Campground.findOneAndUpdate(
+    { slug: req.params.slug },
     req.body.campground,
     (err, updatedCampground) => {
       if (err) {
         console.log('Err: ', err);
         res.redirect(`/campgrounds`);
       } else {
-        res.redirect(`/campgrounds/${req.params.id}`);
+        res.redirect(`/campgrounds/${req.params.slug}`);
       }
     }
   );
 });
 
 // DESTROY route - delete one campground and redirect
-router.delete('/:id', middleware.checkCampgroundOwnership, (req, res) => {
-  Campground.findByIdAndRemove(req.params.id, (err, deletedCampground) => {
-    if (err) {
-      console.log('Err: ', err);
-      res.redirect('/campgrounds');
-    } else {
-      // Delete all associated comments
-      deletedCampground.comments.forEach(commentId => {
-        Comment.findByIdAndRemove(commentId, (err, deletedComment) => {
-          if (err) console.log('Err: ', err);
-          else console.log(deletedComment);
+router.delete('/:slug', middleware.checkCampgroundOwnership, (req, res) => {
+  Campground.findOneAndRemove(
+    { slug: req.params.slug },
+    (err, deletedCampground) => {
+      if (err) {
+        console.log('Err: ', err);
+        res.redirect('/campgrounds');
+      } else {
+        // Delete all associated comments
+        deletedCampground.comments.forEach(commentId => {
+          Comment.findByIdAndRemove(commentId, (err, deletedComment) => {
+            if (err) console.log('Err: ', err);
+            else console.log(deletedComment);
+          });
         });
-      });
 
-      res.redirect('/campgrounds');
+        res.redirect('/campgrounds');
+      }
     }
-  });
+  );
 });
 
 module.exports = router;

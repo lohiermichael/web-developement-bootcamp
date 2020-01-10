@@ -62,7 +62,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', indexRoutes);
-app.use('/campgrounds/:campground_id/comments', commentRoutes);
+app.use('/campgrounds/:slug/comments', commentRoutes);
 app.use('/campgrounds', campgroundRoutes);
 
 // Listen on a PORT

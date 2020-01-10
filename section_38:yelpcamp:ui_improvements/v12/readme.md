@@ -496,3 +496,10 @@ In the landing.css file:
 - Recursive deletion of comments: when deleting a campground deleting associated comments
 - Update campground model:
   1. Require the name
+  2. Add a slug field for semantic URL on the name
+  3. Before saving the campground in the database add it a slug
+  4. Modify the campgrounds routes
+  5. Modify middleware
+  6. Modify the comments routes
+  7. Modify ejs file for the anchor tags and actions of form but not for the conditions
+- Add flash on not existing user
