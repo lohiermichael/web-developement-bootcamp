@@ -490,3 +490,7 @@ In the landing.css file:
 4. Add in the input for the form of campgrounds/edit.ejs
 5. Display the price in the show page
 6. Don't forget to handle the price with the POST route for campground
+
+# 30. Add-ins
+
+- Recursive deletion of comments: when deleting a campground deleting associated comments

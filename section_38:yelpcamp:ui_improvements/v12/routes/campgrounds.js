@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Campground = require('../models/campground');
+const Comment = require('../models/comment');
 const middleware = require('../middleware');
 
 // =============================
@@ -94,6 +95,14 @@ router.delete('/:id', middleware.checkCampgroundOwnership, (req, res) => {
       console.log('Err: ', err);
       res.redirect('/campgrounds');
     } else {
+      // Delete all associated comments
+      deletedCampground.comments.forEach(commentId => {
+        Comment.findByIdAndRemove(commentId, (err, deletedComment) => {
+          if (err) console.log('Err: ', err);
+          else console.log(deletedComment);
+        });
+      });
+
       res.redirect('/campgrounds');
     }
   });
