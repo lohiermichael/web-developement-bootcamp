@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 var campgroundSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: 'Campground name cannot be blank'
+  },
   image: String,
   description: String,
   price: String,

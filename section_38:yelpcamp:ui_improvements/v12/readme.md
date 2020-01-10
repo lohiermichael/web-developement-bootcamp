@@ -494,3 +494,5 @@ In the landing.css file:
 # 30. Add-ins
 
 - Recursive deletion of comments: when deleting a campground deleting associated comments
+- Update campground model:
+  1. Require the name
