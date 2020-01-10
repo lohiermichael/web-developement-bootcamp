@@ -30,6 +30,8 @@ mongoose.connect(
   }
 );
 
+mongoose.set('useCreateIndex', true);
+
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 // We mention __dirname in case it changes
