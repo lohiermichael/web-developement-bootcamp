@@ -38,7 +38,19 @@
       <a href="/campgrounds" class="btn btn-lg btn-success"
         >View All Campgrounds</a
       >
+      <div class="form-group">
+        <form action="/campgrounds" method="GET" class="form-inline">
+          <input
+            type="text"
+            name="search"
+            placeholder="Campground Search..."
+            class="form-control"
+          />
+          <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+      </form>
     </div>
+
     <!-- List of sliding background images -->
     <ul class="slideshow">
       <li></li>

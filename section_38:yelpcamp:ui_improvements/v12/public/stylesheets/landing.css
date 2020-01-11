@@ -10,8 +10,8 @@ body {
   color: #fff;
 }
 
-#welcome {
-  margin-bottom: 30px;
+#landing-header > * {
+  margin-bottom: 20px;
 }
 
 .slideshow {

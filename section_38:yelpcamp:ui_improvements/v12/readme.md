@@ -496,6 +496,7 @@ In the landing.css file:
 - Recursive deletion of comments: when deleting a campground deleting associated comments
 
 - Update campground model:
+
   1. Require the name
   2. Add a slug field for semantic URL on the name
   3. Before saving the campground in the database add it a slug
@@ -504,7 +505,15 @@ In the landing.css file:
   6. Modify the comments routes
   7. Modify ejs file for the anchor tags and actions of form but not for the conditions
 
-* Implement fuzzy search
+- Implement fuzzy search
+  1. Add in a form in the index page of campground
+  2. `npm install locus --save`: debugging package
+  3. Put the following logic in the index file of campgrounds:
+     - If the search input is empty, retrieve all campgrounds
+     - Otherwise, only those with the passed input changed with regexp
+  4. Handle the no-matching research
+  5. Move the form to the landing page as well
+
 * Add flash on not existing user
 * Change footer
 * Add in home link in navigation
