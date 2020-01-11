@@ -504,21 +504,6 @@ In the landing.css file:
   6. Modify the comments routes
   7. Modify ejs file for the anchor tags and actions of form but not for the conditions
 
-* Add in campground location with Google Maps as a new feature
-
-  1. Sign up for a Google developer account, (Gmail is sufficient)
-  2. Get Google Maps API Key
-     - Restrict the Google Map key
-  3. Enable Geocoding API
-  4. get another Geocoding API
-     - Add to application as ENV variable
-  5. Add Google Maps scripts to the application
-  6. Display the campground location in show.ejs
-  7. Update the campground model
-  8. Update the new and edit form
-     - Add location input field
-  9. Update campground routes
-
 * Implement fuzzy search
 * Add flash on not existing user
 * Change footer
