@@ -494,6 +494,7 @@ In the landing.css file:
 # 30. Add-ins
 
 - Recursive deletion of comments: when deleting a campground deleting associated comments
+
 - Update campground model:
   1. Require the name
   2. Add a slug field for semantic URL on the name
@@ -502,16 +503,31 @@ In the landing.css file:
   5. Modify middleware
   6. Modify the comments routes
   7. Modify ejs file for the anchor tags and actions of form but not for the conditions
-- Implement fuzzy search
-- Add in campground location with Google Maps as a new feature
-- Add flash on not existing user
-- Change footer
-- Add in home link in navigation
-- Display time since post was created with Moment JS
-- Create User profile
-- Implement password rest
-- Upload image with Multer and Cloudinary
-- Refactor Async/Await
-- Add in in-app notification
-- Rate and review the campgrounds
-- Display comments on the campground show page directly
+
+* Add in campground location with Google Maps as a new feature
+
+  1. Sign up for a Google developer account, (Gmail is sufficient)
+  2. Get Google Maps API Key
+     - Restrict the Google Map key
+  3. Enable Geocoding API
+  4. get another Geocoding API
+     - Add to application as ENV variable
+  5. Add Google Maps scripts to the application
+  6. Display the campground location in show.ejs
+  7. Update the campground model
+  8. Update the new and edit form
+     - Add location input field
+  9. Update campground routes
+
+* Implement fuzzy search
+* Add flash on not existing user
+* Change footer
+* Add in home link in navigation
+* Display time since post was created with Moment JS
+* Create User profile
+* Implement password rest
+* Upload image with Multer and Cloudinary
+* Refactor Async/Await
+* Add in in-app notification
+* Rate and review the campgrounds
+* Display comments on the campground show page directly
