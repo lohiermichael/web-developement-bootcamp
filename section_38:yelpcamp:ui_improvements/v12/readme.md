@@ -506,6 +506,7 @@ In the landing.css file:
   7. Modify ejs file for the anchor tags and actions of form but not for the conditions
 
 - Implement fuzzy search
+
   1. Add in a form in the index page of campground
   2. `npm install locus --save`: debugging package
   3. Put the following logic in the index file of campgrounds:
@@ -514,10 +515,16 @@ In the landing.css file:
   4. Handle the no-matching research
   5. Move the form to the landing page as well
 
+- Display time since post was created with Moment JS
+
+  1. Install moment JS: `npm i -S moment`
+  2. require moment and add it to app.locals
+  3. Update campground and comment models: add an attribute createdAt
+  4. Use moment in the show.ejs file
+
 * Add flash on not existing user
 * Change footer
 * Add in home link in navigation
-* Display time since post was created with Moment JS
 * Create User profile
 * Implement password rest
 * Upload image with Multer and Cloudinary
