@@ -529,8 +529,7 @@ In the landing.css file:
         * Add conditional active class to menu list items 
         * Add collapse hamburger menu
         * Make the application responsive
-    3. Fix registration flash message bug
-
+        
 * Add flash on not existing user
 * Change footer
 * Add in home link in navigation
