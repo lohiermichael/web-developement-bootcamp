@@ -529,7 +529,10 @@ In the landing.css file:
         * Add conditional active class to menu list items 
         * Add collapse hamburger menu
         * Make the application responsive
-        
+
+- Display comments on the campground show page directly
+
+
 * Add flash on not existing user
 * Change footer
 * Add in home link in navigation
@@ -539,4 +542,3 @@ In the landing.css file:
 * Refactor Async/Await
 * Add in in-app notification
 * Rate and review the campgrounds
-* Display comments on the campground show page directly
