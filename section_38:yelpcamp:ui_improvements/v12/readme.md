@@ -491,7 +491,7 @@ In the landing.css file:
 5. Display the price in the show page
 6. Don't forget to handle the price with the POST route for campground
 
-# 30. Add-ins
+# 30. Add-ons
 
 - Recursive deletion of comments: when deleting a campground deleting associated comments
 
@@ -522,11 +522,20 @@ In the landing.css file:
   3. Update campground and comment models: add an attribute createdAt
   4. Use moment in the show.ejs file
 
+- Improve UI (login, nav-bar, registration)
+    1. Use Bootstrap to style the login and sign up views
+    2. Update the nav-bar menu
+        * Convert .container-fluid to regular .container
+        * Add conditional active class to menu list items 
+        * Add collapse hamburger menu
+        * Make the application responsive
+    3. Fix registration flash message bug
+
 * Add flash on not existing user
 * Change footer
 * Add in home link in navigation
 * Create User profile
-* Implement password rest
+* Implement password reset
 * Upload image with Multer and Cloudinary
 * Refactor Async/Await
 * Add in in-app notification

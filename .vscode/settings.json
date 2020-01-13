@@ -1,7 +1,4 @@
 {
-    "cSpell.words": [
-        "addfriend",
-        "purrfect",
-        "thewdb"
-    ]
+  "cSpell.words": ["addfriend", "purrfect", "thewdb"],
+  "editor.acceptSuggestionOnCommitCharacter": true
 }
