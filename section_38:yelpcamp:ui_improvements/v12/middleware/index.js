@@ -3,7 +3,7 @@ const Comment = require('../models/comment');
 
 // Collection of all the middleware used in the application
 var middleware = {};
-middleware.checkCampgroundOwnership = function(req, res, next) {
+middleware.checkCampgroundOwnership = function (req, res, next) {
   // Condition 1 : to be logged in
   if (req.isAuthenticated()) {
     // Condition 2: owning the campground
@@ -13,7 +13,7 @@ middleware.checkCampgroundOwnership = function(req, res, next) {
         res.redirect('back');
       } else {
         // Mongoose method for comparison between object and string
-        if (foundCampground.author.id.equals(req.user._id)) {
+        if (foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) {
           next();
         } else {
           req.flash('Error', "You don't have permission to do that");
@@ -28,7 +28,7 @@ middleware.checkCampgroundOwnership = function(req, res, next) {
   }
 };
 
-middleware.checkCommentOwnership = function(req, res, next) {
+middleware.checkCommentOwnership = function (req, res, next) {
   // Condition 1 : to be logged in
   if (req.isAuthenticated()) {
     // Condition 2: owning the campground
@@ -37,7 +37,7 @@ middleware.checkCommentOwnership = function(req, res, next) {
         req.flash('error', 'Something went wrong!');
         res.redirect('back');
       } else {
-        if (foundComment.author.id.equals(req.user._id)) {
+        if (foundComment.author.id.equals(req.user._id) || req.user.isAdmin) {
           next();
         } else {
           req.flash('error', "You don't have permission to do that");
@@ -52,7 +52,7 @@ middleware.checkCommentOwnership = function(req, res, next) {
   }
 };
 
-middleware.isLoggedIn = function(req, res, next) {
+middleware.isLoggedIn = function (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }

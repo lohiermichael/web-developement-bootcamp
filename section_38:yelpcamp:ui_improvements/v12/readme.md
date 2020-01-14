@@ -531,12 +531,14 @@ In the landing.css file:
         * Make the application responsive
 
 - Display comments on the campground show page directly
+- Add flash on not existing user
+- Create User admin profile
+    1. Add an attribute isAdmin to the User model
+    2. Add an input in the register view with a code to enter to be an admin
+    3. Add a flash message on sign in if the user is an admin
+    4. Add flash message for not correct admin code given
+    5. Delete and Edit buttons must appear for admin for campgrounds and comment
 
-
-* Add flash on not existing user
-* Change footer
-* Add in home link in navigation
-* Create User profile
 * Implement password reset
 * Upload image with Multer and Cloudinary
 * Refactor Async/Await

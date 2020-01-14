@@ -20,16 +20,34 @@ router.get('/register', (req, res) => {
 // Show register form
 router.post('/register', (req, res) => {
   var newUser = new User({ username: req.body.username });
-  User.register(newUser, req.body.password, (err, user) => {
-    if (err) {
-      req.flash('error', err.message);
-      return res.redirect('/register');
-    }
-    passport.authenticate('local')(req, res, function () {
-      req.flash('success', `Welcome to YelCamp ${user.username}`);
-      res.redirect('/campgrounds');
+  // If the admin code given is wrong
+  if (req.body.adminCode === 'secret123') {
+    newUser.isAdmin = true;
+    register(isAdmin = true);
+  } else if (req.body.adminCode === '') {
+    newUser.isAdmin = false;
+    register(isAdmin = false);
+  } else {
+    req.flash('error', 'You gave a wrong admin code');
+    res.redirect('/register');
+  }
+
+  function register(isAdmin) {
+    User.register(newUser, req.body.password, (err, user) => {
+      if (err) {
+        req.flash('error', err.message);
+        return res.redirect('/register');
+      }
+      passport.authenticate('local')(req, res, function () {
+        req.flash('success', `Welcome to YelCamp ${user.username}`);
+        if (isAdmin) {
+          req.flash('success', ' you have signed up as an admin')
+        }
+        res.redirect('/campgrounds');
+      });
     });
-  });
+  }
+
 });
 
 // Show login form
