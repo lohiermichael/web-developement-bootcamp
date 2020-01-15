@@ -547,7 +547,11 @@ In the landing.css file:
     5. Change the campground SHOW page
     6. Give the number of likes on the INDEX page of the campgrounds
 
-- Implement password reset
+- Make a user profile
+    1. Update the user model with new attributes: first name, last name, email and avatar
+    2. Add the corresponding inputs in the register form
+
+* Implement password reset
     1. Require campground model in routes/index.js
     2. Install and require async, nodemailer, crypto no need to install it, jst require
     3. Make GET route forgot and EJS file for forgot password
@@ -566,5 +570,4 @@ In the landing.css file:
 * Upload image with Multer and Cloudinary
 * Refactor Async/Await
 * Add in in-app notification
-* Rate and review the campgrounds
 * Pagination on Campground

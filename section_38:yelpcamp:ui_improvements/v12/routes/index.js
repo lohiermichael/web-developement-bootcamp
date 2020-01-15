@@ -18,14 +18,15 @@ router.get('/', (req, res) => {
 // AUTH ROUTES
 // =============================
 
-// Handle sign up logic
+// Show register form
 router.get('/register', (req, res) => {
   res.render('register', { page: 'register' });
 });
 
-// Show register form
+// Handle sign up logic
 router.post('/register', (req, res) => {
-  var newUser = new User({ username: req.body.username });
+  eval(require('locus'));
+  var newUser = new User({ username: req.body.username, });
   // If the admin code given is wrong
   if (req.body.adminCode === 'secret123') {
     newUser.isAdmin = true;
