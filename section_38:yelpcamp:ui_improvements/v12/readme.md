@@ -539,8 +539,18 @@ In the landing.css file:
     4. Add flash message for not correct admin code given
     5. Delete and Edit buttons must appear for admin for campgrounds and comment
 
+- Yelpcamp Like button
+    1. Create a new attribute **likes** of campground as a list of users who liked a campground
+    2. Make a new route: POST route for adding a new like in the campground.js file
+    3. Populate likes on the show route of campground
+    4. Use the CDN of jQuery in the header
+    5. Change the campground SHOW page
+    6. Give the number of likes on the INDEX page of the campgrounds
+
 * Implement password reset
 * Upload image with Multer and Cloudinary
 * Refactor Async/Await
 * Add in in-app notification
 * Rate and review the campgrounds
+* Rating and reviews
+* Pagination on Campground

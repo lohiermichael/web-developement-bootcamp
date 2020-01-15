@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
     // Retrieve all campgrounds from the database
-    Campground.find({ name: regex }, function(err, campgrounds) {
+    Campground.find({ name: regex }, function (err, campgrounds) {
       if (err) {
         console.log('Error', err);
       } else {
@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
     });
   } else {
     // Retrieve all campgrounds from the database
-    Campground.find({}, function(err, campgrounds) {
+    Campground.find({}, function (err, campgrounds) {
       if (err) {
         console.log('Error', err);
       } else {
@@ -57,7 +57,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
     }
   };
   // Create a campground and save it in the database
-  Campground.create(newCampground, function(err, newlyCreated) {
+  Campground.create(newCampground, function (err, newlyCreated) {
     if (err) {
       console.log('Error: ', err);
     } else {
@@ -77,8 +77,8 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 router.get('/:slug', (req, res) => {
   // Find campground with slug
   Campground.findOne({ slug: req.params.slug })
-    .populate('comments')
-    .exec(function(err, foundCampground) {
+    .populate('comments likes')
+    .exec(function (err, foundCampground) {
       if (err) {
         console.log('Error', err);
       } else {
@@ -133,6 +133,42 @@ router.delete('/:slug', middleware.checkCampgroundOwnership, (req, res) => {
     }
   );
 });
+
+// Campground Like Route
+router.post("/:slug/like", middleware.isLoggedIn, function (req, res) {
+  Campground.findOne({ slug: req.params.slug },
+    function (err, foundCampground) {
+      if (err) {
+        console.log(err);
+        return res.redirect("/campgrounds");
+      }
+
+      // check if req.user._id exists in foundCampground.likes
+      // Is true if one of the like is the current user
+      // When it finds a match, it stops
+      var foundUserLike = foundCampground.likes.some(function (like) {
+        return like.equals(req.user._id);
+      });
+
+      if (foundUserLike) {
+        // user already liked, removing like
+        foundCampground.likes.pull(req.user._id);
+      } else {
+        // adding the new user like
+        foundCampground.likes.push(req.user);
+      }
+
+      // Save the new campground and redirect to the campground SHOW page
+      foundCampground.save(function (err) {
+        if (err) {
+          console.log(err);
+          return res.redirect("/campgrounds");
+        }
+        return res.redirect("/campgrounds/" + foundCampground.slug);
+      });
+    });
+});
+
 
 // Transform a search into a standardized string
 function escapeRegex(text) {

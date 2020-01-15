@@ -28,13 +28,19 @@ var campgroundSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Comment'
     }
+  ],
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
   ]
 });
 
 // Add a slug before the campground gets saved to the database
-campgroundSchema.pre('save', async function(next) {
+campgroundSchema.pre('save', async function (next) {
   try {
-    // Cßheck if a new campground is being saved, or if the campground name is being modified
+    // Check if a new campground is being saved, or if the campground name is being modified
     if (this.isNew || this.isModified('name')) {
       this.slug = await generateUniqueSlug(this._id, this.name);
     }
