@@ -5,6 +5,7 @@ const Campground = require('../models/campground');
 const User = require('../models/user');
 const async = require("async");
 const nodemailer = require("nodemailer");
+// No need to install it as it is past of node
 const crypto = require("crypto");
 
 
@@ -78,5 +79,17 @@ router.get('/logout', (req, res) => {
   req.flash('success', 'Successfully logged out');
   res.redirect('/campgrounds');
 });
+
+// Forgot password: GET route
+router.get("/forgot", (req, res) => {
+  res.render('forgot');
+});
+
+// Forgot password: POST route
+router.post("/forgot", (req, res) => {
+
+});
+
+
 
 module.exports = router;

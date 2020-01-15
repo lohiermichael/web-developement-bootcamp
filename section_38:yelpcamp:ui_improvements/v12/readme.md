@@ -550,6 +550,7 @@ In the landing.css file:
 - Implement password reset
     1. Require campground model in routes/index.js
     2. Install and require async, nodemailer, crypto no need to install it, jst require
+    3. Make GET route forgot and EJS file for forgot password
 
 * Rating and reviews
     1. Make a new route review
