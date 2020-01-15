@@ -25,8 +25,13 @@ router.get('/register', (req, res) => {
 
 // Handle sign up logic
 router.post('/register', (req, res) => {
-  eval(require('locus'));
-  var newUser = new User({ username: req.body.username, });
+  var newUser = new User({
+    username: req.body.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    avatar: req.body.avatar
+  });
   // If the admin code given is wrong
   if (req.body.adminCode === 'secret123') {
     newUser.isAdmin = true;
@@ -81,6 +86,23 @@ router.get('/logout', (req, res) => {
   res.redirect('/campgrounds');
 });
 
+// User profile
+router.get("/users/:id", (req, res) => {
+  User.findById(req.params.id, (err, foundUser) => {
+    if (err) {
+      res.flash('error', 'Something went wrong');
+      res.redirect('/campgrounds');
+    }
+    Campground.find().where('author.id').equals(foundUser._id).exec((err, campgrounds) => {
+      if (err) {
+        res.flash('error', 'Something went wrong');
+        res.redirect('/campgrounds');
+      }
+      res.render('users/show', { user: foundUser, campgrounds: campgrounds });
+    })
+  })
+});
+
 // Forgot password: GET route
 router.get("/forgot", (req, res) => {
   res.render('forgot');
@@ -88,7 +110,6 @@ router.get("/forgot", (req, res) => {
 
 // Forgot password: POST route
 router.post("/forgot", (req, res) => {
-
 });
 
 

@@ -550,6 +550,8 @@ In the landing.css file:
 - Make a user profile
     1. Update the user model with new attributes: first name, last name, email and avatar
     2. Add the corresponding inputs in the register form
+    3. Make a route and a view for the user profile
+    4. Add address of user profile in anchor tags for the header *Signed In As...* and in the show page of campground *Submitted by...*
 
 * Implement password reset
     1. Require campground model in routes/index.js
