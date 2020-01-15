@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const Campground = require('../models/campground');
 const User = require('../models/user');
+const async = require("async");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
+
 
 // Landing page
 router.get('/', (req, res) => {

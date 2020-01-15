@@ -547,6 +547,10 @@ In the landing.css file:
     5. Change the campground SHOW page
     6. Give the number of likes on the INDEX page of the campgrounds
 
+- Implement password reset
+    1. Require campground model in routes/index.js
+    2. Install and require async, nodemailer, crypto no need to install it, jst require
+
 * Rating and reviews
     1. Make a new route review
     2. Update campground model
@@ -558,7 +562,6 @@ In the landing.css file:
     8. Change campground EJS view
 
 
-* Implement password reset
 * Upload image with Multer and Cloudinary
 * Refactor Async/Await
 * Add in in-app notification
