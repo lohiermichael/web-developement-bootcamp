@@ -547,10 +547,20 @@ In the landing.css file:
     5. Change the campground SHOW page
     6. Give the number of likes on the INDEX page of the campgrounds
 
+* Rating and reviews
+    1. Make a new route review
+    2. Update campground model
+    3. make a review routes: routes/reviews.js
+    4. Add a middleware function for review in middleware.index.js
+    5.Update the campground routes
+    6. Update app.js to require the index routes
+    7. Create new EJS views for reviews
+    8. Change campground EJS view
+
+
 * Implement password reset
 * Upload image with Multer and Cloudinary
 * Refactor Async/Await
 * Add in in-app notification
 * Rate and review the campgrounds
-* Rating and reviews
 * Pagination on Campground
