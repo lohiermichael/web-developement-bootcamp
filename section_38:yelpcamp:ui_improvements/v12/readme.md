@@ -553,7 +553,7 @@ In the landing.css file:
     3. Make a route and a view for the user profile
     4. Add address of user profile in anchor tags for the header *Signed In As...* and in the show page of campground *Submitted by...*
 
-* Implement password reset
+- Implement password reset
     1. Install and require async, nodemailer, crypto no need to install it, jst require
     2. Make GET route forgot and EJS file for forgot password with a form to a POST route
     3. Change the email attribute of the model user to be required and unique
@@ -577,14 +577,41 @@ In the landing.css file:
 
 
 * Rating and reviews
-    1. Make a new route review
-    2. Update campground model
+    1. Make a new model review with:
+        * a rating between 1 and 5
+        * a text associated to comment the review
+        * a campground to which the review is linked
+        * an author of the review
+        * timestamp property set to true so that created and updated times are automatically added
+    2. Update campground model by adding to it:
+        * a list of reviews
+        * a rating which will be the average of all the reviews of the users
     3. make a review routes: routes/reviews.js
-    4. Add a middleware function for review in middleware.index.js
-    5.Update the campground routes
+        * Require the needed modules
+        * Make an INDEX route
+        * Make a NEW route
+        * Make a CREATE route
+        * Make an EDIT route
+        * Make an UPDATE route
+        * Make a DELETE route
+    4. Add middlewares function for review in middleware.index.js:
+        * *checkReviewOwnership`:* to check  if the user owns the review 
+        * *`checkReviewExistence`:* to check if the user has already written a review
+    5.Update the campground routes:
+     * SHOW route: populate the reviews
+     * DELETE route: remove the the reviews of the campground on deletion
     6. Update app.js to require the index routes
-    7. Create new EJS views for reviews
-    8. Change campground EJS view
+    7. Create new EJS index view for reviews
+        * EDIT page
+        * INDEX page
+        * NEW page
+    8. Change campground EJS index view to display the rating
+    9. Add a review section in the campground show page handling:
+        * The rating of the campground
+        * Displaying the 5 latest reviews
+        * The edit and delete options for the right user
+        * The button to see more reviews
+
 
 
 * Upload image with Multer and Cloudinary

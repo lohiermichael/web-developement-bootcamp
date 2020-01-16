@@ -16,10 +16,11 @@ const app = express();
 
 const commentRoutes = require('./routes/comments'),
   campgroundRoutes = require('./routes/campgrounds'),
-  indexRoutes = require('./routes/index');
+  indexRoutes = require('./routes/index'),
+  reviewRoutes = require("./routes/reviews");
 
-const dbName = 'yelp_camp_v12';
 // Connect to the database
+const dbName = 'yelp_camp_v12';
 mongoose.connect(
   `mongodb://localhost/${dbName}`,
   {
@@ -70,6 +71,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRoutes);
 app.use('/campgrounds/:slug/comments', commentRoutes);
 app.use('/campgrounds', campgroundRoutes);
+app.use("/campgrounds/:slug/reviews", reviewRoutes);
 
 // Listen on a PORT
 const PORT = process.env.PORT || 3000;
