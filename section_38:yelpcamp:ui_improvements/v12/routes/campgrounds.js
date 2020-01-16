@@ -4,8 +4,31 @@ const Campground = require('../models/campground');
 const Comment = require('../models/comment');
 const middleware = require('../middleware');
 const Review = require("../models/review");
+const cloudinary = require('cloudinary');
+const multer = require('multer');
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'file.txt')
+  },
+  filename: function (req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+  // accept image files only
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+    return cb(new Error('Only image files are allowed!'), false);
+  }
+  cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter })
 
+cloudinary.config({
+  cloud_name: 'dkezhjprr',
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // =============================
 // CAMPGROUNDS ROUTES
@@ -47,27 +70,23 @@ router.get('/', (req, res) => {
 });
 
 // CREATE route - add new campground to DB
-router.post('/', middleware.isLoggedIn, (req, res) => {
-  // Get data from form and add to campground array
-  var newCampground = {
-    name: req.body.name,
-    image: req.body.image,
-    description: req.body.description,
-    price: req.body.price,
-    author: {
+router.post("/", middleware.isLoggedIn, upload.single('image'), (req, res) => {
+  console.log(req.file);
+  cloudinary.uploader.upload(req.file.path, function (result) {
+    // Add cloudinary url for the image to the campground object under image property
+    req.body.campground.image = result.secure_url;
+    // Add author to campground
+    req.body.campground.author = {
       id: req.user._id,
       username: req.user.username
     }
-  };
-  // Create a campground and save it in the database
-  Campground.create(newCampground, function (err, newlyCreated) {
-    if (err) {
-      console.log('Error: ', err);
-    } else {
-      // Redirect back to campgrounds page
-      // By default it will be redirected to the get route
-      res.redirect('/campgrounds');
-    }
+    Campground.create(req.body.campground, (err, campground) => {
+      if (err) {
+        req.flash('error', err.message);
+        return res.redirect('back');
+      }
+      res.redirect('/campgrounds/' + campground.slug);
+    });
   });
 });
 

@@ -612,9 +612,15 @@ In the landing.css file:
         * The edit and delete options for the right user
         * The button to see more reviews
 
+- Upload image with Multer and Cloudinary
+    1. Sign up to cloudinary
+    2. Install multer and cloudinary: `npm i -S multer cloudinary`
+    3. Modify the for campgrounds/new.ejs
+    3. Add multer and cloudinary configuration to routes/campgrounds.js
+    4. Add the API key and secret as environment variables
+    5. Change the create route to add a file instead of a link
+    *Note:* Important to not forget the attribute `enctype="multipart/form-data"` to the form is the view
 
-
-* Upload image with Multer and Cloudinary
 * Refactor Async/Await
 * Add in in-app notification
 * Pagination on Campground
