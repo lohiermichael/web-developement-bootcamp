@@ -1,7 +1,7 @@
 <%- include('./partials/header') %>
 <div class="row">
   <h1 style="text-align: center">Login</h1>
-  <div style="width: 30%; margin: 25px auto;">
+  <div style="width: 40%; margin: 25px auto;">
     <form action="/login" method="POST">
       <div class="form-group">
         <input type="text" class="form-control" name="username" placeholder="username">
@@ -13,7 +13,11 @@
         <button class="btn btn-lg btn-primary btn-block">Login</button>
       </div>
     </form>
-    <a href="/campgrounds">Go back!</a>
+    <div>
+      <a href="/campgrounds" class="pull-left">Go to Campgrounds!</a>
+      <a href="/forgot" class="pull-right">Forgot password!</a>
+    </div>
+
   </div>
 </div>
 

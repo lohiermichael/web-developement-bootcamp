@@ -554,9 +554,27 @@ In the landing.css file:
     4. Add address of user profile in anchor tags for the header *Signed In As...* and in the show page of campground *Submitted by...*
 
 * Implement password reset
-    1. Require campground model in routes/index.js
-    2. Install and require async, nodemailer, crypto no need to install it, jst require
-    3. Make GET route forgot and EJS file for forgot password
+    1. Install and require async, nodemailer, crypto no need to install it, jst require
+    2. Make GET route forgot and EJS file for forgot password with a form to a POST route
+    3. Change the email attribute of the model user to be required and unique
+    4. Add the two attributes: `resetPasswordExpires` and `resetPasswordToken`
+    5. Make the POST route for forgot email:
+        * Create a token to send by mail
+        * Find the user with the given email in the forgot form
+        * Set two attributes to user: `resetPasswordToken` and `resetPasswordExpires` to be respectively the created token and the current time + 1 hour
+        * Send an email to the user with the library nodemailer
+        * Install dotenv and put the admin password in an environment variable
+        * On G-suit, allow less secure app to access Gmail: click [here](https://devanswers.co/allow-less-secure-apps-access-gmail-account/)
+    6. The mail is sent to the user with a link to reset the password, make the get route for this reset password with a password and it confirmation
+    7. Make a post route for reset password:
+        * Find the user in the database by the given token
+        * Verify that the expiration date of the token is greater than now
+        * Verify that the password and its confirmation match
+        * The user is now identified and can be logged in
+        * Send an email to confirm that
+        * log the user in and redirect him to the campground page
+    8. Make a link on the login view to the forgot page
+
 
 * Rating and reviews
     1. Make a new route review
