@@ -8,9 +8,6 @@ const cloudinary = require('cloudinary');
 const multer = require('multer');
 
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'file.txt')
-  },
   filename: function (req, file, callback) {
     callback(null, Date.now() + file.originalname);
   }
@@ -71,10 +68,15 @@ router.get('/', (req, res) => {
 
 // CREATE route - add new campground to DB
 router.post("/", middleware.isLoggedIn, upload.single('image'), (req, res) => {
-  console.log(req.file);
-  cloudinary.uploader.upload(req.file.path, function (result) {
+  cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
+    if (err) {
+      req.flash('error', err.message);
+      return res.redirect('back');
+    }
     // Add cloudinary url for the image to the campground object under image property
     req.body.campground.image = result.secure_url;
+    // Add image's public_id to campground object
+    req.body.campground.imageId = result.public_id;
     // Add author to campground
     req.body.campground.author = {
       id: req.user._id,
@@ -107,7 +109,8 @@ router.get('/:slug', (req, res) => {
     })
     .exec(function (err, foundCampground) {
       if (err) {
-        console.log('Error', err);
+        req.flash('error', err.message)
+        res.redirect('back');
       } else {
         // Render show campground
         res.render('campgrounds/show', { campground: foundCampground });
@@ -123,47 +126,74 @@ router.get('/:slug/edit', middleware.checkCampgroundOwnership, (req, res) => {
 });
 
 // UPDATE ROUTE - update information for one campground and redirect
-router.put('/:slug', middleware.checkCampgroundOwnership, (req, res) => {
-  Campground.findOneAndUpdate(
+router.put('/:slug', middleware.checkCampgroundOwnership, upload.single('image'), function (req, res) {
+  Campground.findOne(
     { slug: req.params.slug },
-    req.body.campground,
-    (err, updatedCampground) => {
+    async function (err, campground) {
       if (err) {
-        console.log('Err: ', err);
-        res.redirect(`/campgrounds`);
+        req.flash('error', err.message)
+        res.redirect('back');
       } else {
-        res.redirect(`/campgrounds/${req.params.slug}`);
+        // If a new image is uploaded
+        if (req.file) {
+          try {
+            // Remove the image in the cloud
+            await cloudinary.v2.uploader.destroy(campground.imageId);
+            // Upload the new given image
+            var result = await cloudinary.v2.uploader.upload(req.file.path);
+            // Update the attributes of the image of the campground
+            campground.imageId = result.public_id;
+            campground.image = result.secure_url;
+          } catch (err) {
+            req.flash('error', err.message)
+            res.redirect('back');
+          }
+        }
+        // Update the other attributes of the campground
+        campground.name = req.body.name;
+        campground.description = req.body.description;
+        campground.price = req.body.price;
+        // Save the campground in the database
+        campground.save();
+        // Flash success message
+        req.flash('success', 'Campground successfully updated');
+        // Redirect towards the show page
+        res.redirect('/campgrounds');
       }
     }
-  );
+  )
 });
+
+
 
 // DESTROY route - delete one campground and redirect
 router.delete("/:slug", middleware.checkCampgroundOwnership, function (req, res) {
-  Campground.findOneAndUpdate({ slug: req.params.slug }, function (err, campground) {
+  Campground.findOne({ slug: req.params.slug }, async function (err, campground) {
     if (err) {
-      res.redirect("/campgrounds");
-    } else {
-      // Delete all comments associated with the campground
-      Comment.remove({ "_id": { $in: campground.comments } }, function (err) {
-        if (err) {
-          console.log(err);
-          return res.redirect("/campgrounds");
-        }
-        // deletes all reviews associated with the campground
-        Review.Remove({ "_id": { $in: campground.reviews } }, function (err) {
-          if (err) {
-            console.log(err);
-            return res.redirect("/campgrounds");
-          }
-          //  delete the campground
-          campground.remove();
-          req.flash("success", "Campground deleted successfully!");
-          res.redirect("/campgrounds");
-        });
-      });
+      req.flash("error", err.message);
+      return res.redirect('back');
     }
-  });
+    try {
+      // Delete image in the cloud
+      await cloudinary.v2.uploader.destroy(campground.imageId);
+      // Delete all associated comments
+      await Comment.deleteMany({ "_id": { $in: campground.comments } });
+      // Delete all associated reviews
+      await Review.deleteMany({ "_id": { $in: campground.reviews } });
+      // Remove campground
+      campground.remove()
+      // Flash success deletion
+      req.flash('success', 'Campground successfully deleted');
+      // Redirect to the index page of campgrounds
+      res.redirect('/campgrounds')
+
+    } catch {
+      if (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+      }
+    }
+  })
 });
 
 // Campground Like Route

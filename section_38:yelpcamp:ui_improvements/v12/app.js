@@ -25,7 +25,8 @@ mongoose.connect(
   `mongodb://localhost/${dbName}`,
   {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useCreateIndex: true
   },
   err => {
     if (err) console.error(err);

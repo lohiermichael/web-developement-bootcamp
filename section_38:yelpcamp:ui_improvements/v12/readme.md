@@ -620,6 +620,16 @@ In the landing.css file:
     4. Add the API key and secret as environment variables
     5. Change the create route to add a file instead of a link
     *Note:* Important to not forget the attribute `enctype="multipart/form-data"` to the form is the view
+    6. For the edit view:
+        * Copy paste in campgrounds/edit.ejs the div of the image input but remove the required attribute as we don't necessarily want to update the image
+        * Add the attribute `enctype="multipart/form-data"`
+        * In the EDIT route:
+            * Add the middleware to upload a file
+            * Add a condition to upload if a new image is given
+        * Add an attribute id to the image to easily spot it when we want to modify or delete it
+        * Change to version v2 of the API of cloudinary
+        * Change the UPDATE route
+        * Change the DESTROY route
 
 * Refactor Async/Await
 * Add in in-app notification
