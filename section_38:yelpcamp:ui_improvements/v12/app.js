@@ -10,7 +10,6 @@ const express = require('express'),
   methodOverride = require('method-override'),
   expressSession = require('express-session'),
   User = require('./models/user'),
-  seedDB = require('./seeds');
 
 const app = express();
 
@@ -41,7 +40,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // We mention __dirname in case it changes
 app.use(express.static(__dirname + '/public'));
 // Execute the module to test the database
-// seedDB();
 
 // Passport configuration
 app.use(
