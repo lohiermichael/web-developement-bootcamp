@@ -25,7 +25,8 @@ mongoose.connect(
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
   },
   err => {
     if (err) console.error(err);

@@ -153,7 +153,6 @@
         </div>
       </div>
       <!--Collapse Add a comment form END-->
-      <hr>
 
       <!--Check if there are comments, if there are none say no comments.-->
       <% if (campground.comments.length === 0) { %>
@@ -162,7 +161,7 @@
 
       <!--Display comments by looping through them-->
       <% campground.comments.forEach(function(comment) { %>
-      <div class="row mb-5">
+      <div class="row mb-4">
         <div class="col-md-12">
           <strong>
             <% if (currentUser && currentUser._id.equals(comment.author.id)) { %>

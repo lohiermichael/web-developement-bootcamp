@@ -32,47 +32,30 @@ cloudinary.config({
 // =============================
 
 // INDEX route - list all campgrounds
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   var noMatch = false;
-  if (req.query.search) {
-    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-    // Retrieve all campgrounds from the database
-    Campground.find({ name: regex }, function (err, campgrounds) {
-      if (err) {
-        console.log('Error', err);
-      } else {
-        // Display a message if there is no campground
-        if (campgrounds.length == 0) {
-          var noMatch = true;
-        }
-        res.render('campgrounds/index', {
-          campgrounds: campgrounds,
-          noMatch: noMatch
-        });
-      }
-    });
-  } else {
-    // Retrieve all campgrounds from the database
-    Campground.find({}, function (err, campgrounds) {
-      if (err) {
-        console.log('Error', err);
-      } else {
-        res.render('campgrounds/index', {
-          campgrounds: campgrounds,
-          noMatch: noMatch
-        });
-      }
-    });
+  try {
+    // If there is a search: find all corresponding campgrounds in the database
+    if (req.query.search) {
+      const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+      let campgrounds = await Campground.find({ name: regex });
+      if (campgrounds.length == 0) var noMatch = true;
+      res.render('campgrounds/index', { campgrounds, noMatch });
+      // Else: retrieve all campgrounds from the database
+    } else {
+      let campgrounds = await Campground.find({})
+      res.render('campgrounds/index', { campgrounds, noMatch });
+    }
+  } catch (err) {
+    req.flash('error', err.message);
+    return res.redirect('back');
   }
 });
 
 // CREATE route - add new campground to DB
-router.post("/", middleware.isLoggedIn, upload.single('image'), (req, res) => {
-  cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
-    if (err) {
-      req.flash('error', err.message);
-      return res.redirect('back');
-    }
+router.post("/", middleware.isLoggedIn, upload.single('image'), async (req, res) => {
+  try {
+    let result = await cloudinary.v2.uploader.upload(req.file.path)
     // Add cloudinary url for the image to the campground object under image property
     req.body.campground.image = result.secure_url;
     // Add image's public_id to campground object
@@ -82,15 +65,14 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), (req, res) => {
       id: req.user._id,
       username: req.user.username
     }
-    Campground.create(req.body.campground, (err, campground) => {
-      if (err) {
-        req.flash('error', err.message);
-        return res.redirect('back');
-      }
-      res.redirect('/campgrounds/' + campground.slug);
-    });
-  });
-});
+    //  Create the new campground
+    let campground = await Campground.create(req.body.campground);
+    res.redirect('/campgrounds/' + campground.slug);
+  } catch (err) {
+    req.flash('error', err.message);
+    return res.redirect('back');
+  }
+})
 
 // NEW route - display from to create new campground
 router.get('/new', middleware.isLoggedIn, (req, res) => {
@@ -98,137 +80,115 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 });
 
 // SHOW route - display info about one campground
-router.get('/:slug', (req, res) => {
-  // Find campground with slug
-  Campground.findOne({ slug: req.params.slug })
-    .populate('comments')
-    .populate('likes')
-    .populate({
-      path: 'reviews',
-      options: { sort: { createdAt: -1 } }
-    })
-    .exec(function (err, foundCampground) {
-      if (err) {
-        req.flash('error', err.message)
-        res.redirect('back');
-      } else {
-        // Render show campground
-        res.render('campgrounds/show', { campground: foundCampground });
-      }
-    });
+router.get('/:slug', async (req, res) => {
+  try {
+    // / Find campground with slug
+    let campground = await Campground.findOne({ slug: req.params.slug })
+      .populate('comments')
+      .populate('likes')
+      .populate({
+        path: 'reviews',
+        options: { sort: { createdAt: -1 } }
+      })
+      .exec();
+    // Render show campground
+    res.render('campgrounds/show', { campground });
+  } catch (err) {
+    req.flash('error', err.message)
+    res.redirect('back');
+  }
 });
 
 // EDIT route - Display edit form for one campground
 router.get('/:slug/edit', middleware.checkCampgroundOwnership, (req, res) => {
-  Campground.findOne({ slug: req.params.slug }, (err, foundCampground) => {
-    res.render('campgrounds/edit', { campground: foundCampground });
+  Campground.findOne({ slug: req.params.slug }, (err, campground) => {
+    res.render('campgrounds/edit', { campground });
   });
 });
 
 // UPDATE ROUTE - update information for one campground and redirect
-router.put('/:slug', middleware.checkCampgroundOwnership, upload.single('image'), function (req, res) {
-  Campground.findOne(
-    { slug: req.params.slug },
-    async function (err, campground) {
-      if (err) {
-        req.flash('error', err.message)
-        res.redirect('back');
-      } else {
-        // If a new image is uploaded
-        if (req.file) {
-          try {
-            // Remove the image in the cloud
-            await cloudinary.v2.uploader.destroy(campground.imageId);
-            // Upload the new given image
-            var result = await cloudinary.v2.uploader.upload(req.file.path);
-            // Update the attributes of the image of the campground
-            campground.imageId = result.public_id;
-            campground.image = result.secure_url;
-          } catch (err) {
-            req.flash('error', err.message)
-            res.redirect('back');
-          }
-        }
-        // Update the other attributes of the campground
-        campground.name = req.body.name;
-        campground.description = req.body.description;
-        campground.price = req.body.price;
-        // Save the campground in the database
-        campground.save();
-        // Flash success message
-        req.flash('success', 'Campground successfully updated');
-        // Redirect towards the show page
-        res.redirect('/campgrounds');
-      }
+router.put('/:slug', middleware.checkCampgroundOwnership, upload.single('image'), async (req, res) => {
+  try {
+    let campground = await Campground.findOne({ slug: req.params.slug });
+    // If a new image is uploaded
+    if (req.file) {
+      // Remove the image in the cloud
+      await cloudinary.v2.uploader.destroy(campground.imageId);
+      // Upload the new given image
+      var result = await cloudinary.v2.uploader.upload(req.file.path);
+      // Update the attributes of the image of the campground
+      campground.imageId = result.public_id;
+      campground.image = result.secure_url;
+
     }
-  )
+    // Update the other attributes of the campground
+    campground.name = req.body.name;
+    campground.description = req.body.description;
+    campground.price = req.body.price;
+    // Save the campground in the database
+    campground.save();
+    // Flash success message
+    req.flash('success', 'Campground successfully updated');
+    // Redirect towards the show page
+    res.redirect('/campgrounds');
+  } catch (err) {
+    req.flash('error', err.message)
+    res.redirect('back');
+  }
 });
 
 
 
 // DESTROY route - delete one campground and redirect
-router.delete("/:slug", middleware.checkCampgroundOwnership, function (req, res) {
-  Campground.findOne({ slug: req.params.slug }, async function (err, campground) {
-    if (err) {
-      req.flash("error", err.message);
-      return res.redirect('back');
-    }
-    try {
-      // Delete image in the cloud
-      await cloudinary.v2.uploader.destroy(campground.imageId);
-      // Delete all associated comments
-      await Comment.deleteMany({ "_id": { $in: campground.comments } });
-      // Delete all associated reviews
-      await Review.deleteMany({ "_id": { $in: campground.reviews } });
-      // Remove campground
-      campground.remove()
-      // Flash success deletion
-      req.flash('success', 'Campground successfully deleted');
-      // Redirect to the index page of campgrounds
-      res.redirect('/campgrounds')
-
-    } catch {
-      if (err) {
-        req.flash("error", err.message);
-        return res.redirect("back");
-      }
-    }
-  })
+router.delete("/:slug", middleware.checkCampgroundOwnership, async (req, res) => {
+  try {
+    let campground = await Campground.findOne({ slug: req.params.slug });
+    // Delete image in the cloud
+    await cloudinary.v2.uploader.destroy(campground.imageId);
+    // Delete all associated comments
+    await Comment.deleteMany({ "_id": { $in: campground.comments } });
+    // Delete all associated reviews
+    await Review.deleteMany({ "_id": { $in: campground.reviews } });
+    // Remove campground
+    campground.remove()
+    // Flash success deletion
+    req.flash('success', 'Campground successfully deleted');
+    // Redirect to the index page of campgrounds
+    res.redirect('/campgrounds')
+  } catch (err) {
+    req.flash("error", err.message);
+    return res.redirect("back");
+  }
 });
 
+
 // Campground Like Route
-router.post("/:slug/like", middleware.isLoggedIn, function (req, res) {
-  Campground.findOne({ slug: req.params.slug },
-    function (err, foundCampground) {
-      if (err) {
-        console.log(err);
-        return res.redirect("/campgrounds");
-      }
+router.post("/:slug/like", middleware.isLoggedIn, async (req, res) => {
+  try {
+    let campground = await Campground.findOne({ slug: req.params.slug });
+    // check if req.user._id exists in foundCampground.likes
+    // Is true if one of the like is the current user
+    // When it finds a match, it stops
+    var foundUserLike = campground.likes.some(like => {
+      return like.equals(req.user._id);
+    })
+    // If User already liked: remove like
+    if (foundUserLike) {
+      campground.likes.pull(req.user._id);
+      // Else: ddd the new user like
+    } else {
+      campground.likes.push(req.user);
+    }
+    // Save the campground
+    await campground.save();
+    // Redirect to the campground SHOW page
+    return res.redirect("/campgrounds/" + campground.slug);
+    // 
+  } catch (err) {
+    req.flash("error", err.message);
+    return res.redirect("back");
+  }
 
-      // check if req.user._id exists in foundCampground.likes
-      // Is true if one of the like is the current user
-      // When it finds a match, it stops
-      var foundUserLike = foundCampground.likes.some(function (like) {
-        return like.equals(req.user._id);
-      });
-
-      if (foundUserLike) {
-        // user already liked, removing like
-        foundCampground.likes.pull(req.user._id);
-      } else {
-        // adding the new user like
-        foundCampground.likes.push(req.user);
-      }
-
-      // Save the new campground and redirect to the campground SHOW page
-      foundCampground.save(function (err) {
-        if (err) {
-          console.log(err);
-          return res.redirect("/campgrounds");
-        }
-        return res.redirect("/campgrounds/" + foundCampground.slug);
-      });
-    });
 });
 
 
