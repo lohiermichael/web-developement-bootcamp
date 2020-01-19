@@ -9,7 +9,7 @@ const express = require('express'),
   LocalStrategy = require('passport-local').Strategy,
   methodOverride = require('method-override'),
   expressSession = require('express-session'),
-  User = require('./models/user'),
+  User = require('./models/user');
 
 const app = express();
 

@@ -631,6 +631,17 @@ In the landing.css file:
         * Change the UPDATE route
         * Change the DESTROY route
 
-* Refactor Async/Await
+- Migrate to Bootstrap 4
+    1. Update the CDN of the stylesheet of bootstrap in the header and of the script in the footer
+    2. The navbar has disappeared. Let's update it
+    3. On the index page of the campgrounds, change the thumbnails for the new component of Bootstrap
+    4. Add a footer and a margin bottom between the campgrounds and th bottom
+    5. Refactor login and sign-up pages and the new page for campground by adding labels
+    6. On the show page for campground there are multiple glyphicons. This key word of Bootstrap 3 doesn't exist anymore in Bootstrap 4. We use of font size as an alternative
+    7. On all the pages reposition the elements using the Bootstrap classes m and p for margin and padding
+    8. Change thumbnails and wells for cards
+
 * Add in in-app notification
+
+
 * Pagination on Campground
