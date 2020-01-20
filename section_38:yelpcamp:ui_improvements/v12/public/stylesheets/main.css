@@ -66,6 +66,10 @@ body {
 }
 
 #main-container {
-  margin-top: 100px;
+  margin-top: 50px;
+}
+
+#flash-messages {
+  margin-top: 80px;
 }
 
