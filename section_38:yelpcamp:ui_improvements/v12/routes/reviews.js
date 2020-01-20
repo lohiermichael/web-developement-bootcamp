@@ -4,61 +4,59 @@ const Campground = require("../models/campground");
 const Review = require("../models/review");
 const middleware = require("../middleware");
 
-// Reviews INDEX
-router.get("/", function (req, res) {
-    Campground.findOne({ slug: req.params.slug }).populate({
-        path: "reviews",
-        options: { sort: { createdAt: -1 } } // Sorting the populated reviews array to show the latest first
-    }).exec(function (err, campground) {
-        if (err || !campground) {
-            req.flash("error", err.message);
-            return res.redirect("back");
-        }
-        res.render("reviews/index", { campground: campground });
-    });
+// =============================
+// REVIEWS ROUTES
+// =============================
+
+// INDEX route
+router.get("/", async (req, res) => {
+    try {
+        let campground = await Campground.findOne({ slug: req.params.slug }).populate({
+            path: "reviews",
+            options: { sort: { createdAt: -1 } } // Sorting the populated reviews array to show the latest first
+        }).exec()
+        res.render("reviews/index", { campground });
+    } catch (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+    }
 });
 
-// Reviews NEW
-router.get("/new", middleware.isLoggedIn, middleware.checkReviewExistence, function (req, res) {
+// NEW route
+router.get("/new", middleware.isLoggedIn, middleware.checkReviewExistence, async (req, res) => {
     // middleware.checkReviewExistence checks if a user already reviewed the campground, only one review per user is allowed
-    Campground.findOne({ slug: req.params.slug }, function (err, campground) {
-        if (err) {
-            req.flash("error", err.message);
-            return res.redirect("back");
-        }
-        res.render("reviews/new", { campground: campground });
+    try {
 
-    });
+        let campground = await Campground.findOne({ slug: req.params.slug });
+        res.render("reviews/new", { campground });
+    } catch (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+    }
 });
 
-// Reviews CREATE
-router.post("/", middleware.isLoggedIn, middleware.checkReviewExistence, function (req, res) {
-    // Lookup campground using ID
-    Campground.findOne({ slug: req.params.slug }).populate("reviews").exec(function (err, campground) {
-        if (err) {
-            req.flash("error", err.message);
-            return res.redirect("back");
-        }
-        Review.create(req.body.review, function (err, review) {
-            if (err) {
-                req.flash("error", err.message);
-                return res.redirect("back");
-            }
-            // Add author username/id and associated campground to the review
-            review.author.id = req.user._id;
-            review.author.username = req.user.username;
-            review.campground = campground;
-            // Save review
-            review.save();
-            campground.reviews.push(review);
-            // Calculate the new average review for the campground
-            campground.rating = calculateAverage(campground.reviews);
-            // Save campground
-            campground.save();
-            req.flash("success", "Your review has been successfully added.");
-            res.redirect('/campgrounds/' + campground.slug);
-        });
-    });
+//  CREATE route
+router.post("/", middleware.isLoggedIn, middleware.checkReviewExistence, async (req, res) => {
+    try {
+        let campground = await Campground.findOne({ slug: req.params.slug }).populate("reviews").exec();
+        let review = await Review.create(req.body.review);
+        // Add author username/id and associated campground to the review
+        review.author.id = req.user._id;
+        review.author.username = req.user.username;
+        review.campground = campground;
+        // Save review
+        review.save();
+        campground.reviews.push(review);
+        // Calculate the new average review for the campground
+        campground.rating = calculateAverage(campground.reviews);
+        // Save campground
+        campground.save();
+        req.flash("success", "Your review has been successfully added.");
+        res.redirect('/campgrounds/' + campground.slug);
+    } catch (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+    }
 });
 
 // Function that calculates the average of all the reviews' ratings
@@ -73,9 +71,9 @@ function calculateAverage(reviews) {
     return sum / reviews.length;
 }
 
-// Reviews EDIT
+// EDIT route
 router.get("/:review_id/edit", middleware.checkReviewOwnership, function (req, res) {
-    Review.findById(req.params.review_id, function (err, foundReview) {
+    Review.findById(req.params.review_id, (err, foundReview) => {
         if (err) {
             req.flash("error", err.message);
             return res.redirect("back");
@@ -85,48 +83,46 @@ router.get("/:review_id/edit", middleware.checkReviewOwnership, function (req, r
 });
 
 
-// Reviews UPDATE
-router.put("/:review_id", middleware.checkReviewOwnership, function (req, res) {
-    Review.findByIdAndUpdate(req.params.review_id, req.body.review, { new: true }, function (err, updatedReview) {
-        if (err) {
-            req.flash("error", err.message);
-            return res.redirect("back");
-        }
-        Campground.findOne({ slug: req.params.slug }).populate("reviews").exec(function (err, campground) {
-            if (err) {
-                req.flash("error", err.message);
-                return res.redirect("back");
-            }
-            // Recalculate campground average
-            campground.rating = calculateAverage(campground.reviews);
-            // Save changes
-            campground.save();
-            req.flash("success", "Your review was successfully edited.");
-            res.redirect('/campgrounds/' + campground.slug);
-        });
-    });
+// UPDATE route
+router.put("/:review_id", middleware.checkReviewOwnership, async (req, res) => {
+    try {
+        // Update the review
+        await Review.findByIdAndUpdate(req.params.review_id, req.body.review, { new: true });
+        // Update the associated campground object in which the review is
+        let campground = await Campground.findOne({ slug: req.params.slug }).populate("reviews").exec();
+        // Recalculate campground average rating
+        campground.rating = calculateAverage(campground.reviews);
+        // Save changes
+        campground.save();
+        // Flash success message
+        req.flash("success", "Your review was successfully edited.");
+        // Redirect to the campground page
+        res.redirect('/campgrounds/' + campground.slug);
+    } catch (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+    }
 });
 
-// Reviews DESTROY
-router.delete("/:review_id", middleware.checkReviewOwnership, function (req, res) {
-    Review.findByIdAndRemove(req.params.review_id, function (err) {
-        if (err) {
-            req.flash("error", err.message);
-            return res.redirect("back");
-        }
-        Campground.findOneAndUpdate({ slug: req.params.slug }, { $pull: { reviews: req.params.review_id } }, { new: true }).populate("reviews").exec(function (err, campground) {
-            if (err) {
-                req.flash("error", err.message);
-                return res.redirect("back");
-            }
-            // recalculate campground average
-            campground.rating = calculateAverage(campground.reviews);
-            //save changes
-            campground.save();
-            req.flash("success", "Your review was deleted successfully.");
-            res.redirect("/campgrounds/" + req.params.slug);
-        });
-    });
+// DESTROY route
+router.delete("/:review_id", middleware.checkReviewOwnership, async (req, res) => {
+    try {
+        // Delete review
+        await Review.findByIdAndRemove(req.params.review_id);
+        // Update the associated campground object in which the review is
+        let campground = await Campground.findOneAndUpdate({ slug: req.params.slug }, { $pull: { reviews: req.params.review_id } }, { new: true }).populate("reviews").exec();
+        // Recalculate campground average rating
+        campground.rating = calculateAverage(campground.reviews);
+        // Save changes
+        campground.save();
+        // Flash success message
+        req.flash("success", "Your review was successfully edited.");
+        // Redirect to the campground page
+        res.redirect('/campgrounds/' + campground.slug);
+    } catch (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+    }
 });
 
 module.exports = router;

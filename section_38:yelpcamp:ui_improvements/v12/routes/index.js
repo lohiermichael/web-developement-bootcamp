@@ -89,20 +89,15 @@ router.get('/logout', (req, res) => {
 });
 
 // User profile
-router.get("/users/:id", (req, res) => {
-  User.findById(req.params.id, (err, foundUser) => {
-    if (err) {
-      res.flash('error', 'Something went wrong');
-      res.redirect('/campgrounds');
-    }
-    Campground.find().where('author.id').equals(foundUser._id).exec((err, campgrounds) => {
-      if (err) {
-        res.flash('error', 'Something went wrong');
-        res.redirect('/campgrounds');
-      }
-      res.render('users/show', { user: foundUser, campgrounds: campgrounds });
-    })
-  })
+router.get("/users/:id", async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+    let campgrounds = await Campground.find().where('author.id').equals(user._id).exec();
+    res.render('users/show', { user, campgrounds });
+  } catch (err) {
+    req.flash('error', err.message);
+    return res.redirect('back');
+  }
 });
 
 // Forgot password: GET route
