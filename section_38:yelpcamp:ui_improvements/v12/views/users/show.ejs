@@ -32,6 +32,10 @@
             <li><a href="/campgrounds/<%= campground.slug %>"><%= campground.name %></a></li>
             <% }); %>
         </ul>
+        <br>
+        <% if (currentUser && !user._id.equals(currentUser._id)){ %>
+        <a href="/follow/<%= user.id %>"><button class="btn btn-primary">Follow <%= user.username %></button></a>
+        <% }; %>
     </div>
 </div>
 <%- include('../partials/footer') %>

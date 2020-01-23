@@ -23,7 +23,7 @@
                 <i class="fa fa-thumbs-up"></i> Like (<%= campground.likes.length %>)
               </button>
               <% } %>
-              <button type="button" class="btn btn-sm btn-outline-primary"" data-toggle=" modal"
+              <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
                 data-target="#campgroundLikes">See
                 more details
               </button>
@@ -228,7 +228,7 @@
 
     <!-- Campground Likes Modal -->
     <div id="campgroundLikes" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog" role="document">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
@@ -245,7 +245,7 @@
               <tbody>
                 <% campground.likes.forEach(function(like) { %>
                 <tr>
-                  <td><span class="badge"><i class="fas fa-user"></i></span> <%= like.username %></td>
+                  <td><span class="badge"><i class="fa fa-user"></i></span> <%= like.username %></td>
                 </tr>
                 <% }); %>
                 <% if (campground.likes.length === 0) { %>
@@ -262,6 +262,4 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<%- include('../partials/footer') %>
+    <%- include('../partials/footer') %>

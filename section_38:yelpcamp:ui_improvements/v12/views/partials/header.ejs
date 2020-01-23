@@ -16,6 +16,8 @@
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <!-- Personal stylesheet -->
   <link rel="stylesheet" href="/stylesheets/main.css" />
+  <!-- Notification stylesheet -->
+  <link rel="stylesheet" href="/stylesheets/notification.css" />
 </head>
 
 <body>
@@ -41,6 +43,30 @@
           <a class="nav-link" href="/register">Sign Up</a>
         </li>
         <% } else { %>
+        <!-- Notification -->
+        <div class="dropdown" style="float: right; padding: 13px">
+          <a href="#" onclick="return false;" role="button" data-toggle="dropdown" id="dropDownMenu1" data-target="#"
+            style="float: left" aria-expanded="true">
+            <i class="fa fa-bell-o"></i>
+          </a>
+          <span class="badge badge-info"><%= notifications.length  %></span>
+          <ul class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="dropdownMenu1">
+            <a href="/notifications" class="dropdown-header-left pull-left" id="dropDownViewAll">View all
+              notifications</a>
+            <br>
+            <div class="dropdown-divider"></div>
+            <% notifications.forEach(function(notification) { %>
+            <li>
+              <a href="/notifications/<%= notification.id %>">
+                <%= notification.username %> created a new campground
+              </a>
+            </li>
+            <% }); %>
+
+          </ul>
+        </div>
+        <!-- Notification end-->
+
         <li class="nav-item">
           <a class="nav-link" href="/users/<%= currentUser._id %> ">Signed In As <%= currentUser.username %></a>
         </li>

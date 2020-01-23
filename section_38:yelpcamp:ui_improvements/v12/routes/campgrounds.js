@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Campground = require('../models/campground');
 const Comment = require('../models/comment');
+const User = require('../models/user');
+const Notification = require('../models/notification');
 const middleware = require('../middleware');
 const Review = require("../models/review");
 const cloudinary = require('cloudinary');
@@ -67,6 +69,18 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), async (req, res)
     }
     //  Create the new campground
     let campground = await Campground.create(req.body.campground);
+    // Populate the followers of the user who made the campground
+    let user = await User.findById(req.user._id).populate('followers').exec();
+    let newNotification = {
+      username: req.user.username,
+      campgroundSlug: campground.slug
+    }
+    // Iterate over the followers to add the new notification to their notification list
+    for (const follower of user.followers) {
+      let notification = await Notification.create(newNotification);
+      follower.notifications.push(notification);
+      follower.save()
+    }
     res.redirect('/campgrounds/' + campground.slug);
   } catch (err) {
     req.flash('error', err.message);

@@ -642,6 +642,23 @@ In the landing.css file:
     8. Change thumbnails and wells for cards
 
 * Add in in-app notification
-
+    1. Make three GET routes:
+        * One route to follow for a user to follow another user
+        * One route to display all the notifications of an user
+        * One route to handle a notification of an user (seen or unseen)
+    2. Update the user model:
+        * Add a list of notifications
+        * Add a list of followers
+    3. Create a notification model with the following attributes:
+        * `username`: to which the notification will be pushed
+        * `campgroundId`: notifications are only for new campgrounds posts. So a notification is linked to a campground
+        * `isRead`: stating if the notification has been consulted or not    
+    4. In app.js, add the population of the unread notifications for an user when the user is logged in. Save notifications as a local variable
+    5. Add an icon for notification to the header that opens a dropdown menu
+    6. When we crate a campground, i.e. in th POST route of campground, we have to:
+     * Populate the followers of the users who made the campground
+     * Create a new notification
+    7. Make the view for all the notifications
+    8. In the user view add a link to follow
 
 * Pagination on Campground
