@@ -17,3 +17,8 @@ We are going to deploy a simple a application on Heroku made of two routes. We s
 6. mkdir views
 7. touch views/home.ejs
 8. touch views/about.ejs
+9. On app.js:
+    - Require the libraries
+    - Make the routes
+    - Listen on port
+10. Add things in the views
