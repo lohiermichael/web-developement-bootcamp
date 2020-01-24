@@ -1,0 +1,15 @@
+{
+  "name": "simple_app",
+  "version": "1.0.0",
+  "description": "This is a simple that we make to learn how to deploy on Heroku",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Lohier",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  }
+}
