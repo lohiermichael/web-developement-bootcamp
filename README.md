@@ -7,7 +7,7 @@ All along the courses, I have learnt the
 - HTML
 - CSS
 - Javascipt
-* The CSS framwork: Bootstrap
+* The CSS framwork: **Bootstrap**
 * the Javascript library: **jQuery**
 * the Javascript environment: **Node.js**
 * the Javascript framework: **Express.js**
