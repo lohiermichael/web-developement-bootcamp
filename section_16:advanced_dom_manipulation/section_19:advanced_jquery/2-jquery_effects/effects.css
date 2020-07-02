@@ -1,0 +1,9 @@
+/* Styling the divs */
+div {
+    height: 100px;
+    width: 100px;
+    background-color: teal;
+    float: left;
+    margin: 20px;
+    display: none;
+}

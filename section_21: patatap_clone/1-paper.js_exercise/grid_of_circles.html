@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Style sheet -->
+    <link rel="stylesheet" href="grid_of_circles.css" />
+    <!-- Paper.js -->
+    <script type="text/javascript" src="../paper-full.js"></script>
+    <!-- Canvas -->
+    <script type="text/paperscript" canvas="myCanvas">
+        // Make a grid of 10px radius circles every 100px
+        for(var ny = 0; ny <= 1000; ny += 100){
+            for(var nx = 0; nx <= 1000; nx += 100){
+                var myCircle = new Path.Circle(new Point(nx, ny), 10);
+                myCircle.fillColor = 'rgba(255, 255, 255,' + nx/1000 + ')';
+            }
+        }
+    </script>
+    <title>Circles animation</title>
+  </head>
+  <body>
+    <canvas id="myCanvas" resize></canvas>
+  </body>
+</html>
