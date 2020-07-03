@@ -1,0 +1,23 @@
+p {
+    /* Border*/
+    border: 2px solid blue;
+
+    /* Content - Width and Height */
+    width: 10%x; 
+    height:100%;
+
+    /* Padding */
+    padding: 10px;
+    /* padding-left: 40px; */
+
+    /* Margin */
+    /* From top clockwise */
+    /* margin: 20px 40px 50px 100px; */
+    /* margin: 0 auto 10 auto; */
+    /* Top and bottom then right and left */
+    margin: 20 auto;
+}   
+
+p {
+    text-align: center;
+}

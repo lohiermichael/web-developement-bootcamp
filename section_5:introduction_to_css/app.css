@@ -1,0 +1,63 @@
+/* h1 {
+    color: red;
+}
+li {
+   color: green  
+}
+h4 { 
+    color: purple
+} */
+
+h1 {
+    /* The first two digits stand for RED */
+    color: #FF0000
+}
+
+li {
+    /* The next two digits stand for green */
+    color: #FF8000
+}
+
+/* In practice,we use a color picker to find the color that you want */
+
+/* We can also use the rgb syntax */
+
+h4 {
+    color: rgba(34, 23, 185, 0.753)
+}
+
+/* Background color */
+
+h4 {
+    background: rgb(255, 100, 80);
+}
+
+body {
+    background: pink;
+}
+
+/* Image background */
+
+/* body {
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHSDHv77dk9d9mOYleex4tKRqSiDpNFOV4xZcxPiipA1a1DX6z);
+    /* To avoid repeating a small image over again */
+    /* background-repeat: no-repeat; */
+    /* To cover the entire page */
+    /* background-size: cover; */
+/* } */
+
+/* Border */
+/* We have to precise: color, width and style all the time */
+/* h1 {
+    border-color: purple;
+    border-width: 5px;
+    border-style: solid;
+} */
+
+/* Other syntax */
+h1 {
+    border: purple 5px solid;
+}
+h4 {
+    border: rgb(23, 250, 0) 2px dashed;
+}

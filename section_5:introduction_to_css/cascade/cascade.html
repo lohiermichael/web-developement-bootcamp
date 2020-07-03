@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cascade</title>
+    <!--  The li's will inherit the color from the ul  -->
+    <style>
+        /* ul {
+            color: purple;
+        } */
+
+        body {
+            color: red;
+        }
+
+        p {
+            color: green; 
+        }
+        /* This illustrates how the closest element is applied */
+        ul {
+            color: blue; 
+        }
+
+        li {
+            color: orange;
+        }
+
+        .highlight {
+            color: violet;
+        }
+
+        #special {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <p>HELLO!!!</p>
+    <ul>
+        <li class="highlight" id="special">John</li>
+        <li>Paul</li>
+        <li>Georges</li>
+        <li class="highlight">Ringo</li>
+    </ul>
+    
+</body>
+</html>
